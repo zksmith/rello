@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap');
+
+.main-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+
+  .logo {
+    opacity: 0.6;
+  }
+
+  h1 {
+    font-family: 'Kaushan Script', cursive;
+    letter-spacing: 1px;
+    margin: 0 10px;
+    opacity: 0.6;
+  }
+}
