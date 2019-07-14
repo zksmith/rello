@@ -6,30 +6,30 @@ import Header from './components/header/Header';
 import Board from './components/board/Board';
 
 function App() {
-  const DEMO_DATA = [
-    {
-      board_name: 'Kanban Board',
+  const DEMO_DATA = {
+    kanban_board: {
+      title: 'Kanban Board',
       collections: [
         {
           name: 'Sample Collection',
-          items: [{ text: 'Sample Task' }]
+          tasks: [{ text: 'Sample Task' }]
         },
         {
           name: 'Sample Collection 2',
-          items: [{ text: 'Sample Task' }, { text: 'Sample Task' }]
+          tasks: [{ text: 'Sample Task' }, { text: 'Sample Task' }]
         },
         {
           name: 'Sample Collection 3',
-          items: [{ text: 'Sample Task' }]
+          tasks: [{ text: 'Sample Task' }]
         }
       ]
     }
-  ];
+  };
 
   return (
     <>
       <Header />
-      <Board boardData={DEMO_DATA[0]} />
+      <Board boardData={DEMO_DATA['kanban_board']} />
     </>
   );
 }

@@ -2,10 +2,10 @@ import React from 'react';
 
 import './Task.scss';
 
-const Task = ({ item }) => {
+const Task = ({ task }) => {
   return (
     <div className='task'>
-      <p>{item.text}</p>
+      <p>{task.text}</p>
     </div>
   );
 };

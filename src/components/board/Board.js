@@ -4,11 +4,11 @@ import Collection from '../collection/Collection';
 
 import './Board.scss';
 
-const Board = ({ boardData: { board_name, collections } }) => {
+const Board = ({ boardData: { collections, title } }) => {
   return (
     <main className='board'>
       <section className='board-header'>
-        <strong className='board-name'>{board_name}</strong>
+        <strong className='board-name'>{title}</strong>
       </section>
       <div className='collections-container'>
         {collections.map((collection, index) => (
