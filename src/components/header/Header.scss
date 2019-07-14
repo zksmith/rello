@@ -11,12 +11,9 @@
 
   .logo {
     opacity: 0.6;
-  }
-
-  h1 {
+    display: flex;
+    align-items: center;
     font-family: 'Kaushan Script', cursive;
     letter-spacing: 1px;
-    margin: 0 10px;
-    opacity: 0.6;
   }
 }

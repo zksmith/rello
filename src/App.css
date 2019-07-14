@@ -19,7 +19,9 @@ body {
   color: #fff;
   overflow-x: scroll;
 }
-
+button {
+  cursor: pointer;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
