@@ -1,0 +1,22 @@
+.board {
+  height: 100%;
+  margin: 15px 10px;
+  padding-top: 45px;
+
+  .board-header {
+    position: fixed;
+
+    .board-name {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+      font-size: 1.3em;
+      padding: 5px;
+    }
+  }
+
+  .collections-container {
+    display: flex;
+    margin: 15px 0;
+    padding-top: 25px;
+  }
+}

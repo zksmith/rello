@@ -17,9 +17,15 @@ body {
   background: url('./assets/defaultBG.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
+  overflow-x: scroll;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1,
+p {
+  margin: 0px;
 }
