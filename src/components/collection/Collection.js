@@ -10,7 +10,10 @@ const Collection = ({ collection }) => {
       <p className='collection-title'>
         <strong>{collection.name}</strong>
       </p>
-      <Task item={collection.items[0]} />
+      {collection.items.map(item => (
+        <Task item={item} />
+      ))}
+
       <button className='add-button'>+ Add another card</button>
     </section>
   );

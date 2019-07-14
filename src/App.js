@@ -8,19 +8,19 @@ import Board from './components/board/Board';
 function App() {
   const DEMO_DATA = [
     {
-      boardName: 'Kanban Board',
+      board_name: 'Kanban Board',
       collections: [
         {
           name: 'Sample Collection',
-          items: [{ text: 'Sample Text' }]
+          items: [{ text: 'Sample Task' }]
         },
         {
           name: 'Sample Collection 2',
-          items: [{ text: 'Sample Text' }]
+          items: [{ text: 'Sample Task' }, { text: 'Sample Task' }]
         },
         {
           name: 'Sample Collection 3',
-          items: [{ text: 'Sample Text' }]
+          items: [{ text: 'Sample Task' }]
         }
       ]
     }
