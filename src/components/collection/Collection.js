@@ -7,9 +7,8 @@ import {
   createFirstTask
 } from '../../redux/board/boardActions';
 
-import Task from '../task/Task';
-
 import './Collection.scss';
+import TaskList from './TaskList';
 
 const Collection = ({
   collectionName,
@@ -37,10 +36,7 @@ const Collection = ({
         <strong>{collectionName}</strong>
       </p>
 
-      {tasks[collectionId] &&
-        tasks[collectionId].map((task, index) => (
-          <Task key={index} task={task} />
-        ))}
+      <TaskList collectionId={collectionId} tasks={tasks[collectionId]} />
 
       {taskAddInProgress ? (
         <Textarea

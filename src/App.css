@@ -2,10 +2,14 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
 html,
 body {
   height: 100%;
-  overflow: hidden;
 }
 body {
   margin: 0;
@@ -17,7 +21,6 @@ body {
   background: url('./assets/defaultBG.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
-  overflow-x: scroll;
 }
 button {
   cursor: pointer;

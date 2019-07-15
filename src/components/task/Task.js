@@ -1,12 +1,22 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 
 import './Task.scss';
 
-const Task = ({ task }) => {
+const Task = ({ task, index }) => {
   return (
-    <div className='task'>
-      <p>{task}</p>
-    </div>
+    <Draggable draggableId={index + task} index={index}>
+      {provided => (
+        <div
+          className='task'
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <p>{task}</p>
+        </div>
+      )}
+    </Draggable>
   );
 };
 

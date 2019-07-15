@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import Collection from '../collection/Collection';
 
@@ -26,19 +27,25 @@ const Board = ({ collections, boardName, addCollection }) => {
     setCollectionAddInProgress(false);
   };
 
+  const onDragEnd = result => {
+    //TODO
+  };
+
   return (
     <main className='board'>
       <section className='board-header'>
         <strong className='board-name'>{boardName}</strong>
       </section>
       <div className='collections-container'>
-        {collections.map((collection, index) => (
-          <Collection
-            key={index}
-            collectionName={collection.title}
-            collectionId={collection.id}
-          />
-        ))}
+        <DragDropContext onDragEnd={onDragEnd}>
+          {collections.map((collection, index) => (
+            <Collection
+              key={index}
+              collectionName={collection.title}
+              collectionId={collection.id}
+            />
+          ))}
+        </DragDropContext>
 
         {collectionAddInProgress ? (
           <form onSubmit={handleCollectionAdd}>
