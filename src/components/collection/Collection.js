@@ -2,30 +2,22 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Textarea from 'react-textarea-autosize';
 
-import {
-  addTaskToCollection,
-  createFirstTask
-} from '../../redux/board/boardActions';
+import { addTask } from '../../redux/board/boardActions';
 
 import './Collection.scss';
 import TaskList from './TaskList';
 
-const Collection = ({
-  collectionName,
-  collectionId,
-  tasks,
-  addTask,
-  createFirstTask
-}) => {
+const Collection = ({ collectionName, collectionId, tasks, addTask }) => {
+  const tasksForThisCollection = tasks[collectionId];
+
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
   const [newTaskText, setNewTaskText] = useState('');
 
-  const handleAddTask = e => {
-    if (tasks[collectionId]) {
-      addTask(collectionId, newTaskText);
-    } else {
-      createFirstTask(collectionId, newTaskText);
-    }
+  const handleAddTask = () => {
+    //If there are no tasks for given collectionId then isEmptyCollection = true
+    if (newTaskText)
+      addTask(!tasksForThisCollection, collectionId, newTaskText);
+
     setTaskAddInProgress(false);
     setNewTaskText('');
   };
@@ -36,7 +28,7 @@ const Collection = ({
         <strong>{collectionName}</strong>
       </p>
 
-      <TaskList collectionId={collectionId} tasks={tasks[collectionId]} />
+      <TaskList collectionId={collectionId} tasks={tasksForThisCollection} />
 
       {taskAddInProgress ? (
         <Textarea
@@ -62,10 +54,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addTask: (collectionId, task) =>
-    dispatch(addTaskToCollection(collectionId, task)),
-  createFirstTask: (collectionId, task) =>
-    dispatch(createFirstTask(collectionId, task))
+  addTask: (isEmptyCollection, collectionId, task) =>
+    dispatch(addTask(isEmptyCollection, collectionId, task))
 });
 
 export default connect(

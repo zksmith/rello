@@ -12,10 +12,6 @@ const Board = ({ collections, boardName, addCollection }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
 
-  const handleInputChange = e => {
-    setNewCollectionName(e.target.value);
-  };
-
   // If there is and input value add new collection
   const handleCollectionAdd = e => {
     e.preventDefault();
@@ -52,7 +48,7 @@ const Board = ({ collections, boardName, addCollection }) => {
             <input
               type='text'
               autoFocus
-              onChange={handleInputChange}
+              onChange={e => setNewCollectionName(e.target.value)}
               onBlur={handleCollectionAdd}
             />
           </form>

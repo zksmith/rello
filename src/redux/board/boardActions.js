@@ -10,15 +10,20 @@ export const setCollections = collections => ({
   payload: collections
 });
 
-export const addTaskToCollection = (tasksKey, task) => ({
-  type: 'ADD_TASK_TO_COLLECTION',
-  payload: { tasksKey, task }
-});
+export const addTask = (isEmptyCollection, tasksKey, task) => {
+  if (isEmptyCollection) {
+    return {
+      type: 'ADD_FIRST_TASK',
+      payload: { tasksKey, task }
+    };
+  }
+  return {
+    type: 'ADD_TASK_TO_COLLECTION',
+    payload: { tasksKey, task }
+  };
+};
 
-export const createFirstTask = (tasksKey, task) => ({
-  type: 'ADD_FIRST_TASK',
-  payload: { tasksKey, task }
-});
+export const createFirstTask = (tasksKey, task) => ({});
 
 export const addCollection = title => {
   const id = uuidv4();
