@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Textarea from 'react-textarea-autosize';
 
 import {
   addTaskToCollection,
@@ -17,12 +18,17 @@ const Collection = ({
   addTask,
   createFirstTask
 }) => {
-  const handleAddTask = text => {
+  const [taskAddInProgress, setTaskAddInProgress] = useState(false);
+  const [newTaskText, setNewTaskText] = useState('');
+
+  const handleAddTask = e => {
     if (tasks[collectionId]) {
-      addTask(collectionId, text);
+      addTask(collectionId, newTaskText);
     } else {
-      createFirstTask(collectionId, text);
+      createFirstTask(collectionId, newTaskText);
     }
+    setTaskAddInProgress(false);
+    setNewTaskText('');
   };
 
   return (
@@ -30,14 +36,27 @@ const Collection = ({
       <p className='collection-title'>
         <strong>{collectionName}</strong>
       </p>
+
       {tasks[collectionId] &&
         tasks[collectionId].map((task, index) => (
           <Task key={index} task={task} />
         ))}
 
-      <button className='add-button' onClick={() => handleAddTask('teazd')}>
-        + Add another card
-      </button>
+      {taskAddInProgress ? (
+        <Textarea
+          style={{ width: '100%' }}
+          value={newTaskText}
+          onChange={e => setNewTaskText(e.target.value)}
+          onBlur={handleAddTask}
+        />
+      ) : (
+        <button
+          className='add-button'
+          onClick={() => setTaskAddInProgress(true)}
+        >
+          + Add another card
+        </button>
+      )}
     </section>
   );
 };
