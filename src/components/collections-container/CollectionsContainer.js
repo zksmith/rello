@@ -5,7 +5,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import Collection from '../collection/Collection';
 
-import { addCollection } from '../../redux/board/boardActions';
+import { addCollection } from '../../redux/actions/boardActions';
 
 const CollectionsContainer = ({ collections, addCollection }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);

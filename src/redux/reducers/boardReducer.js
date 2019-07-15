@@ -1,3 +1,11 @@
+import {
+  SET_BOARD_NAME,
+  SET_COLLECTIONS,
+  ADD_FIRST_TASK,
+  ADD_TASK_TO_COLLECTION,
+  ADD_COLLECTION
+} from '../types';
+
 const INITIAL_STATE = {
   boardName: 'Kanban Board',
   collections: [
@@ -11,22 +19,22 @@ const INITIAL_STATE = {
 
 const boardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'SET_BOARD_NAME':
+    case SET_BOARD_NAME:
       return {
         ...state,
         boardName: action.payload
       };
-    case 'SET_COLLECTIONS':
+    case SET_COLLECTIONS:
       return {
         ...state,
         collections: [...action.payload]
       };
-    case 'ADD_COLLECTION':
+    case ADD_COLLECTION:
       return {
         ...state,
         collections: [...state.collections, action.payload]
       };
-    case 'ADD_TASK_TO_COLLECTION':
+    case ADD_TASK_TO_COLLECTION:
       return {
         ...state,
         tasks: {
@@ -37,7 +45,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           ]
         }
       };
-    case 'ADD_FIRST_TASK':
+    case ADD_FIRST_TASK:
       return {
         ...state,
         tasks: {

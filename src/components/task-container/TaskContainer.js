@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
-import { addTask } from '../../redux/board/boardActions';
+import { addTask } from '../../redux/actions/boardActions';
 
 import Task from '../task/Task';
 
