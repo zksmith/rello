@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import Textarea from 'react-textarea-autosize';
 
 import { addTask } from '../../redux/board/boardActions';
 
@@ -31,12 +30,14 @@ const Collection = ({ collectionName, collectionId, tasks, addTask }) => {
       <TaskList collectionId={collectionId} tasks={tasksForThisCollection} />
 
       {taskAddInProgress ? (
-        <Textarea
-          style={{ width: '100%' }}
-          value={newTaskText}
-          onChange={e => setNewTaskText(e.target.value)}
-          onBlur={handleAddTask}
-        />
+        <form onSubmit={handleAddTask}>
+          <input
+            style={{ width: '100%' }}
+            value={newTaskText}
+            onChange={e => setNewTaskText(e.target.value)}
+            onBlur={handleAddTask}
+          />
+        </form>
       ) : (
         <button
           className='add-button'
