@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -26,8 +27,8 @@ const CollectionsContainer = ({ collections, addCollection }) => {
   };
 
   return (
-    <div className='collections-container'>
-      <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className='collections-container'>
         {collections.map((collection, index) => (
           <Collection
             key={index}
@@ -35,23 +36,23 @@ const CollectionsContainer = ({ collections, addCollection }) => {
             collectionId={collection.id}
           />
         ))}
-      </DragDropContext>
 
-      {collectionAddInProgress ? (
-        <form onSubmit={handleCollectionAdd}>
-          <input
-            type='text'
-            autoFocus
-            onChange={e => setNewCollectionName(e.target.value)}
-            onBlur={handleCollectionAdd}
-          />
-        </form>
-      ) : (
-        <button onClick={() => setCollectionAddInProgress(true)}>
-          + Add Collection
-        </button>
-      )}
-    </div>
+        {collectionAddInProgress ? (
+          <form onSubmit={handleCollectionAdd}>
+            <input
+              type='text'
+              autoFocus
+              onChange={e => setNewCollectionName(e.target.value)}
+              onBlur={handleCollectionAdd}
+            />
+          </form>
+        ) : (
+          <button onClick={() => setCollectionAddInProgress(true)}>
+            + Add Collection
+          </button>
+        )}
+      </div>
+    </DragDropContext>
   );
 };
 

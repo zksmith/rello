@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CollectionsContainer from './CollectionsContainer';
+import CollectionsContainer from '../collections-container/CollectionsContainer';
 
 import './Board.scss';
 

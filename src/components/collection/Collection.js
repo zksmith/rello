@@ -1,65 +1,18 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import { addTask } from '../../redux/board/boardActions';
+import React from 'react';
 
 import './Collection.scss';
-import TaskList from './TaskList';
+import TaskContainer from '../task-container/TaskContainer';
 
-const Collection = ({ collectionName, collectionId, tasks, addTask }) => {
-  const tasksForThisCollection = tasks[collectionId];
-
-  const [taskAddInProgress, setTaskAddInProgress] = useState(false);
-  const [newTaskText, setNewTaskText] = useState('');
-
-  const handleAddTask = () => {
-    //If there are no tasks for given collectionId then isEmptyCollection = true
-    if (newTaskText)
-      addTask(!tasksForThisCollection, collectionId, newTaskText);
-
-    setTaskAddInProgress(false);
-    setNewTaskText('');
-  };
-
+const Collection = ({ collectionName, collectionId }) => {
   return (
     <section className='collection'>
       <p className='collection-title'>
         <strong>{collectionName}</strong>
       </p>
 
-      <TaskList collectionId={collectionId} tasks={tasksForThisCollection} />
-
-      {taskAddInProgress ? (
-        <form onSubmit={handleAddTask}>
-          <input
-            style={{ width: '100%' }}
-            value={newTaskText}
-            onChange={e => setNewTaskText(e.target.value)}
-            onBlur={handleAddTask}
-          />
-        </form>
-      ) : (
-        <button
-          className='add-button'
-          onClick={() => setTaskAddInProgress(true)}
-        >
-          + Add another card
-        </button>
-      )}
+      <TaskContainer collectionId={collectionId} />
     </section>
   );
 };
 
-const mapStateToProps = state => ({
-  tasks: state.board.tasks
-});
-
-const mapDispatchToProps = dispatch => ({
-  addTask: (isEmptyCollection, collectionId, task) =>
-    dispatch(addTask(isEmptyCollection, collectionId, task))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Collection);
+export default Collection;
