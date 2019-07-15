@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Collection from '../collection/Collection';
@@ -8,6 +8,24 @@ import { addCollection } from '../../redux/board/boardActions';
 import './Board.scss';
 
 const Board = ({ collections, boardName, addCollection }) => {
+  const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState('');
+
+  const handleInputChange = e => {
+    setNewCollectionName(e.target.value);
+  };
+
+  // If there is and input value add new collection
+  const handleCollectionAdd = e => {
+    e.preventDefault();
+    if (newCollectionName) {
+      addCollection(newCollectionName);
+      setNewCollectionName('');
+    }
+
+    setCollectionAddInProgress(false);
+  };
+
   return (
     <main className='board'>
       <section className='board-header'>
@@ -21,9 +39,21 @@ const Board = ({ collections, boardName, addCollection }) => {
             collectionId={collection.id}
           />
         ))}
-        <button onClick={() => addCollection('sample_2', 'Sample 2')}>
-          + Add Collection
-        </button>
+
+        {collectionAddInProgress ? (
+          <form onSubmit={handleCollectionAdd}>
+            <input
+              type='text'
+              autoFocus
+              onChange={handleInputChange}
+              onBlur={handleCollectionAdd}
+            />
+          </form>
+        ) : (
+          <button onClick={() => setCollectionAddInProgress(true)}>
+            + Add Collection
+          </button>
+        )}
       </div>
     </main>
   );

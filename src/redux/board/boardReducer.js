@@ -6,7 +6,7 @@ const INITIAL_STATE = {
       title: 'Sample Collection'
     }
   ],
-  tasks: { sample_collection_tasks: ['Sample Task'] }
+  tasks: { sample_collection: ['Sample Task'] }
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {

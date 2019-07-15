@@ -17,13 +17,11 @@ const Collection = ({
   addTask,
   createFirstTask
 }) => {
-  const tasksKey = `${collectionId}_tasks`;
-
-  const handleAddTask = (tasksKey, text) => {
-    if (tasks[tasksKey]) {
-      addTask(tasksKey, text);
+  const handleAddTask = text => {
+    if (tasks[collectionId]) {
+      addTask(collectionId, text);
     } else {
-      createFirstTask(tasksKey, text);
+      createFirstTask(collectionId, text);
     }
   };
 
@@ -32,13 +30,12 @@ const Collection = ({
       <p className='collection-title'>
         <strong>{collectionName}</strong>
       </p>
-      {tasks[tasksKey] &&
-        tasks[tasksKey].map((task, index) => <Task key={index} task={task} />)}
+      {tasks[collectionId] &&
+        tasks[collectionId].map((task, index) => (
+          <Task key={index} task={task} />
+        ))}
 
-      <button
-        className='add-button'
-        onClick={() => handleAddTask(tasksKey, 'teazd')}
-      >
+      <button className='add-button' onClick={() => handleAddTask('teazd')}>
         + Add another card
       </button>
     </section>
@@ -50,8 +47,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addTask: (tasksKey, task) => dispatch(addTaskToCollection(tasksKey, task)),
-  createFirstTask: (tasksKey, task) => dispatch(createFirstTask(tasksKey, task))
+  addTask: (collectionId, task) =>
+    dispatch(addTaskToCollection(collectionId, task)),
+  createFirstTask: (collectionId, task) =>
+    dispatch(createFirstTask(collectionId, task))
 });
 
 export default connect(

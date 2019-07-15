@@ -1,3 +1,5 @@
+import uuidv4 from 'uuid';
+
 export const setBoardName = name => ({
   type: 'SET_BOARD_NAME',
   payload: name
@@ -18,7 +20,10 @@ export const createFirstTask = (tasksKey, task) => ({
   payload: { tasksKey, task }
 });
 
-export const addCollection = (id, title) => ({
-  type: 'ADD_COLLECTION',
-  payload: { id, title }
-});
+export const addCollection = title => {
+  const id = uuidv4();
+  return {
+    type: 'ADD_COLLECTION',
+    payload: { id, title }
+  };
+};
