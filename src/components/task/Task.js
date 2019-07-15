@@ -5,7 +5,7 @@ import './Task.scss';
 const Task = ({ task }) => {
   return (
     <div className='task'>
-      <p>{task.text}</p>
+      <p>{task}</p>
     </div>
   );
 };
