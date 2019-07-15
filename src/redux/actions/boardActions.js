@@ -1,8 +1,7 @@
 import {
   SET_BOARD_NAME,
   SET_COLLECTIONS,
-  ADD_FIRST_TASK,
-  ADD_TASK_TO_COLLECTION,
+  ADD_TASK,
   ADD_COLLECTION
 } from '../types';
 import uuidv4 from 'uuid';
@@ -17,16 +16,11 @@ export const setCollections = collections => ({
   payload: collections
 });
 
-export const addTask = (isEmptyCollection, tasksKey, task) => {
-  if (isEmptyCollection) {
-    return {
-      type: ADD_FIRST_TASK,
-      payload: { tasksKey, task }
-    };
-  }
+export const addTask = (collectionId, subject, content = '') => {
+  const taskId = uuidv4();
   return {
-    type: ADD_TASK_TO_COLLECTION,
-    payload: { tasksKey, task }
+    type: ADD_TASK,
+    payload: { collectionId, taskId, subject, content }
   };
 };
 
@@ -34,6 +28,6 @@ export const addCollection = title => {
   const id = uuidv4();
   return {
     type: ADD_COLLECTION,
-    payload: { id, title }
+    payload: { id, title, taskIds: [] }
   };
 };

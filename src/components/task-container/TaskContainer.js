@@ -10,11 +10,9 @@ const TaskContainer = ({ tasks, addTask, collectionId }) => {
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
   const [newTaskText, setNewTaskText] = useState('');
 
-  const handleAddTask = () => {
-    //If there are no tasks in collection isEmptyCollection = true
-    const isEmptyCollection = !tasks;
-
-    if (newTaskText) addTask(isEmptyCollection, collectionId, newTaskText);
+  const handleAddTask = e => {
+    e.preventDefault();
+    if (newTaskText) addTask(collectionId, newTaskText);
 
     setTaskAddInProgress(false);
     setNewTaskText('');
@@ -52,20 +50,23 @@ const TaskContainer = ({ tasks, addTask, collectionId }) => {
           className='add-button'
           onClick={() => setTaskAddInProgress(true)}
         >
-          + Add another card
+          + Add another task
         </button>
       )}
     </>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  tasks: state.board.tasks[ownProps.collectionId]
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    tasks: state.board.collections[ownProps.collectionId].taskIds.map(
+      id => state.board.tasks[id]
+    )
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  addTask: (isEmptyCollection, collectionId, task) =>
-    dispatch(addTask(isEmptyCollection, collectionId, task))
+  addTask: (collectionId, subject) => dispatch(addTask(collectionId, subject))
 });
 
 export default connect(

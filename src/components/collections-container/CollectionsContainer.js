@@ -29,11 +29,12 @@ const CollectionsContainer = ({ collections, addCollection }) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className='collections-container'>
-        {collections.map((collection, index) => (
+        {Object.keys(collections).map((key, index) => (
           <Collection
             key={index}
-            collectionName={collection.title}
-            collectionId={collection.id}
+            collectionName={collections[key].title}
+            collectionId={collections[key].id}
+            taskIds={collections[key].taskIds}
           />
         ))}
 
@@ -61,7 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addCollection: (id, title) => dispatch(addCollection(id, title))
+  addCollection: title => dispatch(addCollection(title))
 });
 
 export default connect(

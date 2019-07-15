@@ -1,5 +1,4 @@
 export const SET_BOARD_NAME = 'SET_BOARD_NAME';
 export const SET_COLLECTIONS = 'SET_COLLECTIONS';
-export const ADD_FIRST_TASK = 'ADD_FIRST_TASK';
-export const ADD_TASK_TO_COLLECTION = 'ADD_TASK_TO_COLLECTION';
+export const ADD_TASK = 'ADD_TASK';
 export const ADD_COLLECTION = 'ADD_COLLECTION';
