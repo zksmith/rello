@@ -8,6 +8,8 @@ import {
   REORDER_TASK
 } from '../types';
 
+import { updateCollectionTaskIds } from './taskUtils';
+
 const INITIAL_STATE = {
   boardName: 'Kanban Board',
   collections: {
@@ -49,13 +51,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
       return {
         // Update taskIds in target collection using collectionId
         ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
-        },
+        collections: updateCollectionTaskIds(
+          state.collections,
+          collectionId,
+          newTaskIds
+        ),
 
         // Update tasks using taskId
         tasks: {
@@ -76,13 +76,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
-        }
+        collections: updateCollectionTaskIds(
+          state.collections,
+          collectionId,
+          newTaskIds
+        )
       };
     }
     case REORDER_TASK: {
@@ -99,13 +97,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
-        }
+        collections: updateCollectionTaskIds(
+          state.collections,
+          collectionId,
+          newTaskIds
+        )
       };
     }
     case DELETE_TASK: {
@@ -116,13 +112,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
-        }
+        collections: updateCollectionTaskIds(
+          state.collections,
+          collectionId,
+          newTaskIds
+        )
       };
     }
     default:
