@@ -4,7 +4,8 @@ import {
   ADD_TASK,
   ADD_COLLECTION,
   MOVE_TASK,
-  REMOVE_TASK
+  DELETE_TASK,
+  REORDER_TASK
 } from '../types';
 import uuidv4 from 'uuid';
 
@@ -34,16 +35,31 @@ export const addCollection = title => {
   };
 };
 
-export const moveTask = (collectionId, taskId) => {
+export const moveTask = (
+  collectionId,
+  prevCollectionId,
+  taskId,
+  sourceIndex,
+  destinationIndex
+) => {
+  console.log(destinationIndex);
+
+  if (prevCollectionId === collectionId) {
+    return {
+      type: REORDER_TASK,
+      payload: { collectionId, taskId, sourceIndex, destinationIndex }
+    };
+  }
+
   return {
     type: MOVE_TASK,
-    payload: { collectionId, taskId }
+    payload: { collectionId, taskId, sourceIndex, destinationIndex }
   };
 };
 
 export const removeTask = (collectionId, taskId) => {
   return {
-    type: REMOVE_TASK,
+    type: DELETE_TASK,
     payload: { collectionId, taskId }
   };
 };

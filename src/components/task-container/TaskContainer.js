@@ -29,7 +29,7 @@ const TaskContainer = ({ tasks, addTask, collectionId }) => {
           >
             {tasks &&
               tasks.map((task, index) => (
-                <Task key={index} task={task} index={index} />
+                <Task key={task.id} task={task} index={index} />
               ))}
             {provided.placeholder}
           </div>

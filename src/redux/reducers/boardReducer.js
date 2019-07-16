@@ -4,7 +4,8 @@ import {
   ADD_TASK,
   ADD_COLLECTION,
   MOVE_TASK,
-  REMOVE_TASK
+  DELETE_TASK,
+  REORDER_TASK
 } from '../types';
 
 const INITIAL_STATE = {
@@ -67,9 +68,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         }
       };
     }
-    case MOVE_TASK:
-      const { collectionId, taskId } = action.payload;
-      const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
+    case MOVE_TASK: {
+      const { collectionId, taskId, destinationIndex } = action.payload;
+
+      const newTaskIds = [...state.collections[collectionId].taskIds];
+      newTaskIds.splice(destinationIndex, 0, taskId);
 
       return {
         ...state,
@@ -81,7 +84,31 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           }
         }
       };
-    case REMOVE_TASK: {
+    }
+    case REORDER_TASK: {
+      const {
+        collectionId,
+        taskId,
+        sourceIndex,
+        destinationIndex
+      } = action.payload;
+
+      const newTaskIds = [...state.collections[collectionId].taskIds];
+      newTaskIds.splice(sourceIndex, 1);
+      newTaskIds.splice(destinationIndex, 0, taskId);
+
+      return {
+        ...state,
+        collections: {
+          ...state.collections,
+          [collectionId]: {
+            ...state.collections[collectionId],
+            taskIds: newTaskIds
+          }
+        }
+      };
+    }
+    case DELETE_TASK: {
       const { collectionId, taskId } = action.payload;
       const newTaskIds = state.collections[collectionId].taskIds.filter(
         id => id !== taskId

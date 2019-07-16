@@ -33,8 +33,6 @@ const CollectionsContainer = ({
 
   const onDragEnd = result => {
     const { destination, source, draggableId } = result;
-    console.log(result);
-
     if (!destination) return;
     if (
       destination.droppableId === source.droppableId &&
@@ -44,8 +42,16 @@ const CollectionsContainer = ({
     }
     if (destination.droppableId !== source.droppableId) {
       removeTask(source.droppableId, draggableId);
-      moveTask(destination.droppableId, draggableId);
     }
+
+    moveTask(
+      destination.droppableId,
+      source.droppableId,
+      draggableId,
+      source.index,
+      destination.index
+    );
+
     //TODO
   };
 
@@ -54,7 +60,7 @@ const CollectionsContainer = ({
       <div className='collections-container'>
         {Object.keys(collections).map((key, index) => (
           <Collection
-            key={index}
+            key={collections[key].id}
             collectionName={collections[key].title}
             collectionId={collections[key].id}
             taskIds={collections[key].taskIds}
@@ -86,7 +92,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addCollection: title => dispatch(addCollection(title)),
-  moveTask: (collectionId, taskId) => dispatch(moveTask(collectionId, taskId)),
+  moveTask: (...args) => dispatch(moveTask(...args)),
   removeTask: (collectionId, taskId) =>
     dispatch(removeTask(collectionId, taskId))
 });
