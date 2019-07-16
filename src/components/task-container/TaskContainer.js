@@ -23,7 +23,7 @@ const TaskContainer = ({ tasks, addTask, collectionId }) => {
       <Droppable droppableId={collectionId}>
         {provided => (
           <div
-            style={{ padding: '5px' }}
+            style={{ margin: '5px 0' }}
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

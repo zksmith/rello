@@ -2,7 +2,9 @@ import {
   SET_BOARD_NAME,
   SET_COLLECTIONS,
   ADD_TASK,
-  ADD_COLLECTION
+  ADD_COLLECTION,
+  MOVE_TASK,
+  REMOVE_TASK
 } from '../types';
 
 const INITIAL_STATE = {
@@ -40,22 +42,51 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         }
       };
     case ADD_TASK:
-      const { collectionId, taskId, subject, content } = action.payload;
       return {
         ...state,
         collections: {
           ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: [...state.collections[collectionId].taskIds, taskId]
+          [action.payload.collectionId]: {
+            ...state.collections[action.payload.collectionId],
+            taskIds: [
+              ...state.collections[action.payload.collectionId].taskIds,
+              action.payload.taskId
+            ]
           }
         },
         tasks: {
           ...state.tasks,
-          [taskId]: {
-            id: taskId,
-            subject,
-            content
+          [action.payload.taskId]: {
+            id: action.payload.taskId,
+            subject: action.payload.subject,
+            content: action.payload.content
+          }
+        }
+      };
+    case MOVE_TASK:
+      return {
+        ...state,
+        collections: {
+          ...state.collections,
+          [action.payload.collectionId]: {
+            ...state.collections[action.payload.collectionId],
+            taskIds: [
+              ...state.collections[action.payload.collectionId].taskIds,
+              action.payload.taskId
+            ]
+          }
+        }
+      };
+    case REMOVE_TASK:
+      return {
+        ...state,
+        collections: {
+          ...state.collections,
+          [action.payload.collectionId]: {
+            ...state.collections[action.payload.collectionId],
+            taskIds: state.collections[
+              action.payload.collectionId
+            ].taskIds.filter(id => id !== action.payload.taskId)
           }
         }
       };

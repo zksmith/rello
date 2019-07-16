@@ -2,7 +2,9 @@ import {
   SET_BOARD_NAME,
   SET_COLLECTIONS,
   ADD_TASK,
-  ADD_COLLECTION
+  ADD_COLLECTION,
+  MOVE_TASK,
+  REMOVE_TASK
 } from '../types';
 import uuidv4 from 'uuid';
 
@@ -29,5 +31,19 @@ export const addCollection = title => {
   return {
     type: ADD_COLLECTION,
     payload: { id, title, taskIds: [] }
+  };
+};
+
+export const moveTask = (collectionId, taskId) => {
+  return {
+    type: MOVE_TASK,
+    payload: { collectionId, taskId }
+  };
+};
+
+export const removeTask = (collectionId, taskId) => {
+  return {
+    type: REMOVE_TASK,
+    payload: { collectionId, taskId }
   };
 };
