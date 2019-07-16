@@ -8,14 +8,14 @@ import Collection from '../collection/Collection';
 import {
   addCollection,
   moveTask,
-  removeTask
+  deleteTask
 } from '../../redux/actions/boardActions';
 
 const CollectionsContainer = ({
   collections,
   addCollection,
   moveTask,
-  removeTask
+  deleteTask
 }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
@@ -41,7 +41,7 @@ const CollectionsContainer = ({
       return;
     }
     if (destination.droppableId !== source.droppableId) {
-      removeTask(source.droppableId, draggableId);
+      deleteTask(source.droppableId, draggableId);
     }
 
     moveTask(
@@ -56,8 +56,8 @@ const CollectionsContainer = ({
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className='collections-container'>
+    <div className='collections-container'>
+      <DragDropContext onDragEnd={onDragEnd}>
         {Object.keys(collections).map((key, index) => (
           <Collection
             key={collections[key].id}
@@ -66,23 +66,23 @@ const CollectionsContainer = ({
             taskIds={collections[key].taskIds}
           />
         ))}
+      </DragDropContext>
 
-        {collectionAddInProgress ? (
-          <form onSubmit={handleCollectionAdd}>
-            <input
-              type='text'
-              autoFocus
-              onChange={e => setNewCollectionName(e.target.value)}
-              onBlur={handleCollectionAdd}
-            />
-          </form>
-        ) : (
-          <button onClick={() => setCollectionAddInProgress(true)}>
-            + Add Collection
-          </button>
-        )}
-      </div>
-    </DragDropContext>
+      {collectionAddInProgress ? (
+        <form onSubmit={handleCollectionAdd}>
+          <input
+            type='text'
+            autoFocus
+            onChange={e => setNewCollectionName(e.target.value)}
+            onBlur={handleCollectionAdd}
+          />
+        </form>
+      ) : (
+        <button onClick={() => setCollectionAddInProgress(true)}>
+          + Add Collection
+        </button>
+      )}
+    </div>
   );
 };
 
@@ -93,8 +93,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addCollection: title => dispatch(addCollection(title)),
   moveTask: (...args) => dispatch(moveTask(...args)),
-  removeTask: (collectionId, taskId) =>
-    dispatch(removeTask(collectionId, taskId))
+  deleteTask: (collectionId, taskId) =>
+    dispatch(deleteTask(collectionId, taskId))
 });
 
 export default connect(

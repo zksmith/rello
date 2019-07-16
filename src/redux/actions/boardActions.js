@@ -35,6 +35,7 @@ export const addCollection = title => {
   };
 };
 
+//Handle Task Drag and Drop
 export const moveTask = (
   collectionId,
   prevCollectionId,
@@ -42,9 +43,8 @@ export const moveTask = (
   sourceIndex,
   destinationIndex
 ) => {
-  console.log(destinationIndex);
-
   if (prevCollectionId === collectionId) {
+    //handle user moving tasks within a collection
     return {
       type: REORDER_TASK,
       payload: { collectionId, taskId, sourceIndex, destinationIndex }
@@ -57,7 +57,7 @@ export const moveTask = (
   };
 };
 
-export const removeTask = (collectionId, taskId) => {
+export const deleteTask = (collectionId, taskId) => {
   return {
     type: DELETE_TASK,
     payload: { collectionId, taskId }
