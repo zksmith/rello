@@ -41,55 +41,63 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           [action.payload.id]: { ...action.payload }
         }
       };
-    case ADD_TASK:
+    case ADD_TASK: {
+      const { collectionId, taskId, subject, content } = action.payload;
+      const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
+
       return {
+        // Update taskIds in target collection using collectionId
         ...state,
         collections: {
           ...state.collections,
-          [action.payload.collectionId]: {
-            ...state.collections[action.payload.collectionId],
-            taskIds: [
-              ...state.collections[action.payload.collectionId].taskIds,
-              action.payload.taskId
-            ]
+          [collectionId]: {
+            ...state.collections[collectionId],
+            taskIds: newTaskIds
           }
         },
+
+        // Update tasks using taskId
         tasks: {
           ...state.tasks,
-          [action.payload.taskId]: {
-            id: action.payload.taskId,
-            subject: action.payload.subject,
-            content: action.payload.content
+          [taskId]: {
+            id: taskId,
+            subject,
+            content
           }
         }
       };
+    }
     case MOVE_TASK:
+      const { collectionId, taskId } = action.payload;
+      const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
+
       return {
         ...state,
         collections: {
           ...state.collections,
-          [action.payload.collectionId]: {
-            ...state.collections[action.payload.collectionId],
-            taskIds: [
-              ...state.collections[action.payload.collectionId].taskIds,
-              action.payload.taskId
-            ]
+          [collectionId]: {
+            ...state.collections[collectionId],
+            taskIds: newTaskIds
           }
         }
       };
-    case REMOVE_TASK:
+    case REMOVE_TASK: {
+      const { collectionId, taskId } = action.payload;
+      const newTaskIds = state.collections[collectionId].taskIds.filter(
+        id => id !== taskId
+      );
+
       return {
         ...state,
         collections: {
           ...state.collections,
-          [action.payload.collectionId]: {
-            ...state.collections[action.payload.collectionId],
-            taskIds: state.collections[
-              action.payload.collectionId
-            ].taskIds.filter(id => id !== action.payload.taskId)
+          [collectionId]: {
+            ...state.collections[collectionId],
+            taskIds: newTaskIds
           }
         }
       };
+    }
     default:
       return { ...state };
   }
