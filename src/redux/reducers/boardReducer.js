@@ -9,6 +9,7 @@ import {
 } from '../types';
 
 import { updateCollectionTaskIds } from './taskUtils';
+import { REHYDRATE } from 'redux-persist';
 
 const INITIAL_STATE = {
   boardName: 'Kanban Board',
@@ -119,6 +120,9 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         )
       };
     }
+    case REHYDRATE:
+      if (action.payload) return { ...state, ...action.payload.board };
+      return { ...state };
     default:
       return { ...state };
   }
