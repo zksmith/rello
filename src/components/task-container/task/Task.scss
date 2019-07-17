@@ -1,7 +1,13 @@
 .task {
   background: #fff;
+  display: flex;
+  justify-content: space-between;
   border-radius: 3px;
   box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.16);
   padding: 5px;
   margin-bottom: 10px;
+
+  .task-delete {
+    color: #c5c5c5;
+  }
 }
