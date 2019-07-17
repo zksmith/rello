@@ -5,7 +5,8 @@ import {
   ADD_COLLECTION,
   MOVE_TASK,
   DELETE_TASK,
-  REORDER_TASK
+  REORDER_TASK,
+  DELETE_COLLECTION
 } from '../types';
 import uuidv4 from 'uuid';
 
@@ -32,6 +33,13 @@ export const addCollection = title => {
   return {
     type: ADD_COLLECTION,
     payload: { id, title, taskIds: [] }
+  };
+};
+
+export const deleteCollection = collectionId => {
+  return {
+    type: DELETE_COLLECTION,
+    payload: collectionId
   };
 };
 

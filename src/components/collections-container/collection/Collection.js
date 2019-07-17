@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteCollection } from '../../../redux/actions/boardActions';
 
 import './Collection.scss';
-import TaskContainer from '../task-container/TaskContainer';
+import TaskContainer from '../../task-container/TaskContainer';
 
-const Collection = ({ collectionName, collectionId }) => {
+const Collection = ({ collectionName, collectionId, deleteCollection }) => {
   return (
     <section className='collection'>
       <p className='collection-title'>
@@ -12,7 +14,7 @@ const Collection = ({ collectionName, collectionId }) => {
           className='collection-delete'
           onClick={() => {
             if (window.confirm('Are you sure you wish to delete this item?'))
-              window.alert('TODO: handle Collection delete');
+              deleteCollection();
           }}
         >
           &#9932;
@@ -24,4 +26,11 @@ const Collection = ({ collectionName, collectionId }) => {
   );
 };
 
-export default Collection;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  deleteCollection: () => dispatch(deleteCollection(ownProps.collectionId))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Collection);

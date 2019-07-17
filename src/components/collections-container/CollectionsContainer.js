@@ -3,7 +3,7 @@ import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import Collection from '../collection/Collection';
+import Collection from './collection/Collection';
 
 import {
   addCollection,
@@ -58,7 +58,7 @@ const CollectionsContainer = ({
   return (
     <div className='collections-container'>
       <DragDropContext onDragEnd={onDragEnd}>
-        {Object.keys(collections).map((key, index) => (
+        {Object.keys(collections).map(key => (
           <Collection
             key={collections[key].id}
             collectionName={collections[key].title}

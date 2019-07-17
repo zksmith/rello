@@ -3,6 +3,7 @@ import {
   SET_COLLECTIONS,
   ADD_TASK,
   ADD_COLLECTION,
+  DELETE_COLLECTION,
   MOVE_TASK,
   DELETE_TASK,
   REORDER_TASK
@@ -45,6 +46,14 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           [action.payload.id]: { ...action.payload }
         }
       };
+    case DELETE_COLLECTION: {
+      const newCollections = { ...state.collections };
+      delete newCollections[action.payload];
+      return {
+        ...state,
+        collections: newCollections
+      };
+    }
     case ADD_TASK: {
       const { collectionId, taskId, subject, content } = action.payload;
       const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
