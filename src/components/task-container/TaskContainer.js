@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
-import Task from '../task/Task';
+import Task from './task/Task';
 import TaskAddButton from './task-add-button/TaskAddButton';
 
 const TaskContainer = ({ tasks, addTask, collectionId }) => {
