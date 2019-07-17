@@ -2,16 +2,13 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
-
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 body {
+  overflow-x: scroll;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
