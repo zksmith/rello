@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteCollection } from '../../../redux/actions/boardActions';
+import { deleteCollection } from '../../redux/actions/boardActions';
 
 import './Collection.scss';
-import TaskContainer from '../../task-container/TaskContainer';
+import TaskContainer from '../task-container/TaskContainer';
 
 const Collection = ({ collectionName, collectionId, deleteCollection }) => {
   return (

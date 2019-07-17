@@ -3,7 +3,7 @@ import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import Collection from './collection/Collection';
+import Collection from '../collection/Collection';
 
 import {
   addCollection,

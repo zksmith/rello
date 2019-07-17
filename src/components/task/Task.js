@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { deleteTask } from '../../../redux/actions/boardActions';
+import { deleteTask } from '../../redux/actions/boardActions';
 
 import './Task.scss';
 

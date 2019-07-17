@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addTask } from '../../../redux/actions/boardActions';
+import { addTask } from '../../redux/actions/boardActions';
 
 const TaskAddButton = ({ addTask }) => {
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
