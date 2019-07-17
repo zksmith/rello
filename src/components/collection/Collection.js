@@ -8,6 +8,15 @@ const Collection = ({ collectionName, collectionId }) => {
     <section className='collection'>
       <p className='collection-title'>
         <strong>{collectionName}</strong>
+        <span
+          className='collection-delete'
+          onClick={() => {
+            if (window.confirm('Are you sure you wish to delete this item?'))
+              window.alert('TODO: handle Collection delete');
+          }}
+        >
+          &#9932;
+        </span>
       </p>
 
       <TaskContainer collectionId={collectionId} />

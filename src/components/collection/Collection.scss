@@ -10,6 +10,13 @@
 
   .collection-title {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .collection-delete {
+      cursor: pointer;
+      color: #777777;
+    }
   }
 
   .add-button {

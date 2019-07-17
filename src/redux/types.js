@@ -3,6 +3,7 @@ export const SET_COLLECTIONS = 'SET_COLLECTIONS';
 
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_COLLECTION = 'ADD_COLLECTION';
+export const DELETE_COLLECTION = 'DELETE_COLLECTION';
 
 export const MOVE_TASK = 'MOVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
