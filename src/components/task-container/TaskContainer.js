@@ -1,23 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
-import { addTask } from '../../redux/actions/boardActions';
-
 import Task from '../task/Task';
+import TaskAddButton from './task-add-button/TaskAddButton';
 
 const TaskContainer = ({ tasks, addTask, collectionId }) => {
-  const [taskAddInProgress, setTaskAddInProgress] = useState(false);
-  const [newTaskText, setNewTaskText] = useState('');
-
-  const handleAddTask = e => {
-    e.preventDefault();
-    if (newTaskText) addTask(collectionId, newTaskText);
-
-    setTaskAddInProgress(false);
-    setNewTaskText('');
-  };
-
   return (
     <>
       <Droppable droppableId={collectionId}>
@@ -36,23 +24,7 @@ const TaskContainer = ({ tasks, addTask, collectionId }) => {
         )}
       </Droppable>
 
-      {taskAddInProgress ? (
-        <form onSubmit={handleAddTask}>
-          <input
-            style={{ width: '100%' }}
-            value={newTaskText}
-            onChange={e => setNewTaskText(e.target.value)}
-            onBlur={handleAddTask}
-          />
-        </form>
-      ) : (
-        <button
-          className='add-button'
-          onClick={() => setTaskAddInProgress(true)}
-        >
-          + Add another task
-        </button>
-      )}
+      <TaskAddButton collectionId={collectionId} />
     </>
   );
 };
@@ -65,11 +37,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  addTask: (collectionId, subject) => dispatch(addTask(collectionId, subject))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TaskContainer);
+export default connect(mapStateToProps)(TaskContainer);

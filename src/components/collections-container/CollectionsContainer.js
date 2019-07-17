@@ -72,6 +72,7 @@ const CollectionsContainer = ({
         <form onSubmit={handleCollectionAdd}>
           <input
             type='text'
+            placeholder='Collection Title'
             autoFocus
             onChange={e => setNewCollectionName(e.target.value)}
             onBlur={handleCollectionAdd}
