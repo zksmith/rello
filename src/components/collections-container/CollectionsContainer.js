@@ -40,9 +40,6 @@ const CollectionsContainer = ({
     ) {
       return;
     }
-    if (destination.droppableId !== source.droppableId) {
-      deleteTask(source.droppableId, draggableId);
-    }
 
     moveTask(
       destination.droppableId,

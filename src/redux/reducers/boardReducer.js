@@ -5,11 +5,13 @@ import {
   ADD_COLLECTION,
   DELETE_COLLECTION,
   MOVE_TASK,
-  DELETE_TASK,
-  REORDER_TASK
+  DELETE_TASK
 } from '../types';
 
-import { updateCollectionTaskIds } from './taskUtils';
+import {
+  updateCollectionTaskIds,
+  updateCollectionTaskIdsOnMove
+} from './taskUtils';
 import { REHYDRATE } from 'redux-persist';
 
 const INITIAL_STATE = {
@@ -79,38 +81,29 @@ const boardReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case MOVE_TASK: {
-      const { collectionId, taskId, destinationIndex } = action.payload;
-
-      const newTaskIds = [...state.collections[collectionId].taskIds];
-      newTaskIds.splice(destinationIndex, 0, taskId);
-
-      return {
-        ...state,
-        collections: updateCollectionTaskIds(
-          state.collections,
-          collectionId,
-          newTaskIds
-        )
-      };
-    }
-    case REORDER_TASK: {
       const {
         collectionId,
+        prevCollectionId,
         taskId,
         sourceIndex,
         destinationIndex
       } = action.payload;
 
+      //PrevTaskIds handles user moving task to another collection
+      const prevTaskIds = [...state.collections[prevCollectionId].taskIds];
+      prevTaskIds.splice(sourceIndex, 1);
+
       const newTaskIds = [...state.collections[collectionId].taskIds];
-      newTaskIds.splice(sourceIndex, 1);
       newTaskIds.splice(destinationIndex, 0, taskId);
 
       return {
         ...state,
-        collections: updateCollectionTaskIds(
+        collections: updateCollectionTaskIdsOnMove(
           state.collections,
           collectionId,
-          newTaskIds
+          prevCollectionId,
+          newTaskIds,
+          prevTaskIds
         )
       };
     }

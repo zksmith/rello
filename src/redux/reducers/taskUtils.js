@@ -9,3 +9,21 @@ export const updateCollectionTaskIds = (
     taskIds: newTaskIds
   }
 });
+
+export const updateCollectionTaskIdsOnMove = (
+  collections,
+  collectionId,
+  prevCollectionId,
+  newTaskIds,
+  prevTaskIds
+) => ({
+  ...collections,
+  [collectionId]: {
+    ...collections[collectionId],
+    taskIds: newTaskIds
+  },
+  [prevCollectionId]: {
+    ...collections[prevCollectionId],
+    taskIds: prevTaskIds
+  }
+});
