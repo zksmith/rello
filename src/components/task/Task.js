@@ -17,7 +17,7 @@ const Task = ({ task: { id, subject }, collectionId, index, deleteTask }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <p>{subject}</p>
+          <p style={{ width: '100%' }}>{subject}</p>
           <span
             className='task-delete'
             onClick={() => deleteTask(collectionId, id)}
