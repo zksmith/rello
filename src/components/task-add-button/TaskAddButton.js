@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addTask } from '../../redux/actions/boardActions';
+import { addTaskIdToCollection } from '../../redux/actions/collectionActions';
 
 const TaskAddButton = ({ addTask }) => {
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
@@ -34,7 +34,8 @@ const TaskAddButton = ({ addTask }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addTask: subject => dispatch(addTask(ownProps.collectionId, { subject }))
+  addTask: subject =>
+    dispatch(addTaskIdToCollection(ownProps.collectionId, { subject }))
 });
 
 export default connect(

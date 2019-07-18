@@ -9,7 +9,7 @@ import {
   addCollection,
   moveTask,
   deleteTask
-} from '../../redux/actions/boardActions';
+} from '../../redux/actions/collectionActions';
 
 const CollectionsContainer = ({
   collections,

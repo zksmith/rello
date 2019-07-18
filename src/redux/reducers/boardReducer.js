@@ -1,7 +1,7 @@
 import {
   SET_BOARD_NAME,
   SET_COLLECTIONS,
-  ADD_TASK,
+  ADD_TASK_ID_TO_COLLECTION,
   ADD_COLLECTION,
   DELETE_COLLECTION,
   MOVE_TASK,
@@ -54,7 +54,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         collections: newCollections
       };
     }
-    case ADD_TASK: {
+    case ADD_TASK_ID_TO_COLLECTION: {
       const { collectionId, taskId, subject, content } = action.payload;
       const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
 
