@@ -58,7 +58,7 @@ export const moveTask = ({
   };
 };
 
-export const deleteTask = (collectionId, taskId) => {
+export const removeTaskId = (collectionId, taskId) => {
   return {
     type: REMOVE_TASK_ID_FROM_COLLECTION,
     payload: { collectionId, taskId }

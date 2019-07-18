@@ -17,18 +17,13 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         boardName: action.payload
       };
     case DELETE_TASK: {
-      const { collectionId, taskId } = action.payload;
-      const newTaskIds = state.collections[collectionId].taskIds.filter(
-        id => id !== taskId
-      );
+      const { taskId } = action.payload;
+      const newTasks = { ...state.tasks };
+      delete newTasks[taskId];
 
       return {
         ...state,
-        collections: updateCollectionTaskIds(
-          state.collections,
-          collectionId,
-          newTaskIds
-        )
+        tasks: newTasks
       };
     }
     default:

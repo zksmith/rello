@@ -35,8 +35,6 @@ const TaskContainer = ({ tasks, collectionId }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state.collections);
-
   if (state.collections)
     return {
       tasks: state.collections[ownProps.collectionId].taskIds.map(
