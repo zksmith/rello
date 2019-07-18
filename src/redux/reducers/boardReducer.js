@@ -1,4 +1,4 @@
-import { SET_BOARD_NAME, DELETE_TASK } from '../types';
+import { SET_BOARD_NAME, ADD_TASK, DELETE_TASK } from '../types';
 
 import { updateCollectionTaskIds } from './taskUtils';
 
@@ -16,6 +16,22 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         ...state,
         boardName: action.payload
       };
+    case ADD_TASK: {
+      const { id, subject, content } = action.payload;
+
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [id]: {
+            id,
+            subject,
+            content
+          }
+        }
+      };
+    }
+
     case DELETE_TASK: {
       const { taskId } = action.payload;
       const newTasks = { ...state.tasks };

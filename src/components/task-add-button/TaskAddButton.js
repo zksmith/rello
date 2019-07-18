@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import uuidv4 from 'uuid';
 
 import { addTaskIdToCollection } from '../../redux/actions/collectionActions';
+import { addTask } from '../../redux/actions/boardActions';
 
 const TaskAddButton = ({ addTask }) => {
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
@@ -9,7 +11,7 @@ const TaskAddButton = ({ addTask }) => {
 
   const handleAddTask = e => {
     e.preventDefault();
-    if (newTaskText) addTask(newTaskText);
+    if (newTaskText) addTask({ subject: newTaskText, content: '' });
 
     setTaskAddInProgress(false);
     setNewTaskText('');
@@ -34,8 +36,11 @@ const TaskAddButton = ({ addTask }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addTask: subject =>
-    dispatch(addTaskIdToCollection(ownProps.collectionId, { subject }))
+  addTask: task => {
+    const id = uuidv4();
+    dispatch(addTask(id, task));
+    dispatch(addTaskIdToCollection(id, ownProps.collectionId));
+  }
 });
 
 export default connect(

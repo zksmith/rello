@@ -29,12 +29,12 @@ export const deleteCollection = collectionId => {
   };
 };
 
-export const addTaskIdToCollection = (collectionId, task) => {
-  const { subject, content } = task;
-  const taskId = uuidv4();
+export const addTaskIdToCollection = (taskId, collectionId) => {
+  console.log('HERE2');
+
   return {
     type: ADD_TASK_ID_TO_COLLECTION,
-    payload: { collectionId, taskId, subject, content }
+    payload: { collectionId, taskId }
   };
 };
 

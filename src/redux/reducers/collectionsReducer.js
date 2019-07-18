@@ -36,25 +36,16 @@ const boardReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case ADD_TASK_ID_TO_COLLECTION: {
-      const { collectionId, taskId, subject, content } = action.payload;
+      const { collectionId, taskId } = action.payload;
+
       const newTaskIds = [...state[collectionId].taskIds, taskId];
 
       return {
-        // Update taskIds in target collection using collectionId
         ...state,
         [collectionId]: {
           ...state[collectionId],
           taskIds: newTaskIds
         }
-        // // Update tasks using taskId
-        // tasks: {
-        //   ...state.tasks,
-        //   [taskId]: {
-        //     id: taskId,
-        //     subject,
-        //     content
-        //   }
-        // }
       };
     }
     case REMOVE_TASK_ID_FROM_COLLECTION: {
