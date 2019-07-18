@@ -34,7 +34,7 @@ const TaskAddButton = ({ addTask }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addTask: subject => dispatch(addTask(ownProps.collectionId, subject))
+  addTask: subject => dispatch(addTask(ownProps.collectionId, { subject }))
 });
 
 export default connect(

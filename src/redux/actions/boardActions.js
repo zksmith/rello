@@ -20,7 +20,8 @@ export const setCollections = collections => ({
   payload: collections
 });
 
-export const addTask = (collectionId, subject, content = '') => {
+export const addTask = (collectionId, task) => {
+  const { subject, content } = task;
   const taskId = uuidv4();
   return {
     type: ADD_TASK,
