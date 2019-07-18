@@ -39,13 +39,13 @@ export const addTaskIdToCollection = (collectionId, task) => {
 };
 
 //Handle Task Drag and Drop
-export const moveTask = (
+export const moveTask = ({
   collectionId,
   prevCollectionId,
   taskId,
   sourceIndex,
   destinationIndex
-) => {
+}) => {
   return {
     type: MOVE_TASK,
     payload: {
