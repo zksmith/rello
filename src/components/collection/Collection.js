@@ -13,7 +13,11 @@ const Collection = ({ collectionName, collectionId, deleteCollection }) => {
         <span
           className='collection-delete'
           onClick={() => {
-            if (window.confirm('Are you sure you wish to delete this item?'))
+            if (
+              window.confirm(
+                `Are you sure you wish to delete ${collectionName}?`
+              )
+            )
               deleteCollection();
           }}
         >

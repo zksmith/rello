@@ -71,11 +71,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         destinationIndex
       } = action.payload;
 
-      //PrevTaskIds handles user moving task to another collection
-      const prevTaskIds = [...state[prevCollectionId].taskIds];
-      prevTaskIds.splice(sourceIndex, 1);
-
       const newTaskIds = [...state[collectionId].taskIds];
+      if (prevCollectionId === collectionId) {
+        //this handles user reording task in a collection
+        newTaskIds.splice(sourceIndex, 1);
+      }
       newTaskIds.splice(destinationIndex, 0, taskId);
 
       return {
@@ -83,10 +83,6 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         [collectionId]: {
           ...state[collectionId],
           taskIds: newTaskIds
-        },
-        [prevCollectionId]: {
-          ...state[prevCollectionId],
-          taskIds: prevTaskIds
         }
       };
     }

@@ -5,9 +5,18 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import Collection from '../collection/Collection';
 
-import { addCollection, moveTask } from '../../redux/actions/collectionActions';
+import {
+  addCollection,
+  moveTask,
+  removeTaskId
+} from '../../redux/actions/collectionActions';
 
-const CollectionsContainer = ({ collections, addCollection, moveTask }) => {
+const CollectionsContainer = ({
+  collections,
+  addCollection,
+  moveTask,
+  removeTaskId
+}) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
 
@@ -30,6 +39,10 @@ const CollectionsContainer = ({ collections, addCollection, moveTask }) => {
       destination.index === source.index
     ) {
       return;
+    }
+
+    if (destination.droppableId !== source.droppableId) {
+      removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
     }
 
     moveTask({
@@ -79,7 +92,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addCollection: title => dispatch(addCollection(title)),
-  moveTask: args => dispatch(moveTask(args))
+  moveTask: args => dispatch(moveTask(args)),
+  removeTaskId: args => dispatch(removeTaskId(args))
 });
 
 export default connect(

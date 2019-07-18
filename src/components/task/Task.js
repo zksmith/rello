@@ -20,7 +20,14 @@ const Task = ({ task: { id, subject }, collectionId, index, deleteTask }) => {
           <p style={{ width: '100%' }}>{subject}</p>
           <span
             className='task-delete'
-            onClick={() => deleteTask(collectionId, id)}
+            onClick={() => {
+              if (
+                window.confirm(
+                  `Are you sure you wish to delete "${subject}?" task`
+                )
+              )
+                deleteTask(collectionId, id);
+            }}
           >
             &#9932;
           </span>
@@ -32,7 +39,7 @@ const Task = ({ task: { id, subject }, collectionId, index, deleteTask }) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteTask: (collectionId, id) => {
-    dispatch(removeTaskId(collectionId, id));
+    dispatch(removeTaskId({ collectionId, taskId: id }));
     dispatch(deleteTask(id));
   }
 });
