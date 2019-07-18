@@ -74,7 +74,7 @@ const CollectionsContainer = ({ collections, addCollection, moveTask }) => {
 };
 
 const mapStateToProps = state => ({
-  collections: state.board.collections
+  collections: state.collections
 });
 
 const mapDispatchToProps = dispatch => ({
