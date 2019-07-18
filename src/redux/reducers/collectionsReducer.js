@@ -83,6 +83,10 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         [collectionId]: {
           ...state[collectionId],
           taskIds: newTaskIds
+        },
+        [prevCollectionId]: {
+          ...state[prevCollectionId],
+          taskIds: prevTaskIds
         }
       };
     }

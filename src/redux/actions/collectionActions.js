@@ -30,8 +30,6 @@ export const deleteCollection = collectionId => {
 };
 
 export const addTaskIdToCollection = (taskId, collectionId) => {
-  console.log('HERE2');
-
   return {
     type: ADD_TASK_ID_TO_COLLECTION,
     payload: { collectionId, taskId }
