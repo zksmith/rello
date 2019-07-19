@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
+import './TaskContainer.scss';
 import Task from '../task/Task';
 import TaskAddButton from '../task-add-button/TaskAddButton';
 
@@ -11,7 +12,7 @@ const TaskContainer = ({ tasks, collectionId }) => {
       <Droppable droppableId={collectionId}>
         {provided => (
           <div
-            style={{ margin: '5px 0' }}
+            className='task-container'
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -28,7 +29,6 @@ const TaskContainer = ({ tasks, collectionId }) => {
           </div>
         )}
       </Droppable>
-
       <TaskAddButton collectionId={collectionId} />
     </>
   );

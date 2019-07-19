@@ -1,9 +1,11 @@
 .collection {
+  display: flex;
+  flex-direction: column;
   background-color: #dcdcdc;
   border-radius: 3px;
   color: #000;
-  max-width: 300px;
-  min-width: 300px;
+  width: 300px;
+  max-height: 85vh;
   padding: 8px;
   margin-right: 5px;
   overflow-wrap: break-word;
