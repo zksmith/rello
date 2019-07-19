@@ -40,7 +40,6 @@ const CollectionsContainer = ({
     ) {
       return;
     }
-
     if (destination.droppableId !== source.droppableId) {
       removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
     }
@@ -55,7 +54,7 @@ const CollectionsContainer = ({
   };
 
   return (
-    <div className='collections-container'>
+    <section className='collections-container'>
       <DragDropContext onDragEnd={onDragEnd}>
         {Object.keys(collections).map(key => (
           <Collection
@@ -67,6 +66,7 @@ const CollectionsContainer = ({
         ))}
       </DragDropContext>
 
+      {/* TODO: Move this to sepertate  component and place in board.js */}
       {collectionAddInProgress ? (
         <form onSubmit={handleCollectionAdd}>
           <input
@@ -82,7 +82,7 @@ const CollectionsContainer = ({
           + Add Collection
         </button>
       )}
-    </div>
+    </section>
   );
 };
 

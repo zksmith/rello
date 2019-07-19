@@ -73,7 +73,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       const newTaskIds = [...state[collectionId].taskIds];
       if (prevCollectionId === collectionId) {
-        //this handles user reording task in a collection
+        //this handles user reording task within a collection
         newTaskIds.splice(sourceIndex, 1);
       }
       newTaskIds.splice(destinationIndex, 0, taskId);

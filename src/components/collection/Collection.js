@@ -7,7 +7,7 @@ import TaskContainer from '../task-container/TaskContainer';
 
 const Collection = ({ collectionName, collectionId, deleteCollection }) => {
   return (
-    <section className='collection'>
+    <article className='collection'>
       <p className='collection-title'>
         <strong>{collectionName}</strong>
         <span
@@ -26,7 +26,7 @@ const Collection = ({ collectionName, collectionId, deleteCollection }) => {
       </p>
 
       <TaskContainer collectionId={collectionId} />
-    </section>
+    </article>
   );
 };
 

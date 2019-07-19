@@ -1,7 +1,5 @@
 import { SET_BOARD_NAME, ADD_TASK, DELETE_TASK } from '../types';
 
-import { updateCollectionTaskIds } from './taskUtils';
-
 const INITIAL_STATE = {
   boardName: 'Kanban Board',
   tasks: {
