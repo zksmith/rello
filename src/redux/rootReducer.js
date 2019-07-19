@@ -12,7 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   board: boardReducer,
-  collections: collectionsReducer
+  collectionState: collectionsReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

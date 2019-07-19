@@ -53,7 +53,7 @@ const CollectionsContainer = ({ collections, addCollection }) => {
 };
 
 const mapStateToProps = state => ({
-  collections: state.collections
+  collections: state.collectionState.collections
 });
 
 const mapDispatchToProps = dispatch => ({

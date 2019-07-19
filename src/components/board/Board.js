@@ -9,6 +9,7 @@ import CollectionsContainer from '../collections-container/CollectionsContainer'
 import './Board.scss';
 
 const Board = ({ boardName, moveTask, removeTaskId }) => {
+  //Handles all Drag and Drop functionality TODO: clean names
   const onDragEnd = result => {
     const { destination, source, draggableId } = result;
     if (!destination) return;

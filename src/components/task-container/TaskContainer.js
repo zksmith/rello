@@ -35,12 +35,11 @@ const TaskContainer = ({ tasks, collectionId }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  if (state.collections)
-    return {
-      tasks: state.collections[ownProps.collectionId].taskIds.map(
-        id => state.board.tasks[id]
-      )
-    };
+  return {
+    tasks: state.collectionState.collections[ownProps.collectionId].taskIds.map(
+      id => state.board.tasks[id]
+    )
+  };
 };
 
 export default connect(mapStateToProps)(TaskContainer);
