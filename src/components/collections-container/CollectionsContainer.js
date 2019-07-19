@@ -1,70 +1,36 @@
 import React, { useState } from 'react';
 import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 import Collection from '../collection/Collection';
 
-import {
-  addCollection,
-  moveTask,
-  removeTaskId
-} from '../../redux/actions/collectionActions';
+import { addCollection } from '../../redux/actions/collectionActions';
 
-const CollectionsContainer = ({
-  collections,
-  addCollection,
-  moveTask,
-  removeTaskId
-}) => {
+const CollectionsContainer = ({ collections, addCollection }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
-  const [newCollectionName, setNewCollectionName] = useState('');
+  const [newCollectionTitle, setNewCollectionTitle] = useState('');
 
   // If there is and input value add new collection
   const handleCollectionAdd = e => {
     e.preventDefault();
-    if (newCollectionName) {
-      addCollection(newCollectionName);
-      setNewCollectionName('');
+    if (newCollectionTitle) {
+      addCollection(newCollectionTitle);
+      setNewCollectionTitle('');
     }
 
     setCollectionAddInProgress(false);
   };
 
-  const onDragEnd = result => {
-    const { destination, source, draggableId } = result;
-    if (!destination) return;
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-    if (destination.droppableId !== source.droppableId) {
-      removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
-    }
-
-    moveTask({
-      collectionId: destination.droppableId,
-      prevCollectionId: source.droppableId,
-      taskId: draggableId,
-      sourceIndex: source.index,
-      destinationIndex: destination.index
-    });
-  };
-
   return (
     <section className='collections-container'>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {Object.keys(collections).map(key => (
-          <Collection
-            key={collections[key].id}
-            collectionName={collections[key].title}
-            collectionId={collections[key].id}
-            taskIds={collections[key].taskIds}
-          />
-        ))}
-      </DragDropContext>
+      {Object.keys(collections).map(key => (
+        <Collection
+          key={collections[key].id}
+          collectionName={collections[key].title}
+          collectionId={collections[key].id}
+          taskIds={collections[key].taskIds}
+        />
+      ))}
 
       {/* TODO: Move this to sepertate  component and place in board.js */}
       {collectionAddInProgress ? (
@@ -73,7 +39,7 @@ const CollectionsContainer = ({
             type='text'
             placeholder='Collection Title'
             autoFocus
-            onChange={e => setNewCollectionName(e.target.value)}
+            onChange={e => setNewCollectionTitle(e.target.value)}
             onBlur={handleCollectionAdd}
           />
         </form>
@@ -91,9 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addCollection: title => dispatch(addCollection(title)),
-  moveTask: args => dispatch(moveTask(args)),
-  removeTaskId: args => dispatch(removeTaskId(args))
+  addCollection: title => dispatch(addCollection(title))
 });
 
 export default connect(
