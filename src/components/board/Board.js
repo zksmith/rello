@@ -12,7 +12,13 @@ import CollectionsContainer from '../collection-container/CollectionContainer';
 
 import './Board.scss';
 
-const Board = ({ boardName, moveTask, moveCollection, removeTaskId }) => {
+const Board = ({
+  boardName,
+  totalTasks,
+  moveTask,
+  moveCollection,
+  removeTaskId
+}) => {
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
     if (!destination) return;
@@ -44,6 +50,7 @@ const Board = ({ boardName, moveTask, moveCollection, removeTaskId }) => {
     <main className='board'>
       <section className='board-header'>
         <strong className='board-name'>{boardName}</strong>
+        <span className='board-name'>Total Tasks: {totalTasks}</span>
       </section>
       <DragDropContext onDragEnd={onDragEnd}>
         <CollectionsContainer />
@@ -53,7 +60,8 @@ const Board = ({ boardName, moveTask, moveCollection, removeTaskId }) => {
 };
 
 const mapStateToProps = state => ({
-  boardName: state.board.boardName
+  boardName: state.board.boardName,
+  totalTasks: Object.keys(state.board.tasks).length
 });
 
 const mapDispatchToProps = dispatch => ({

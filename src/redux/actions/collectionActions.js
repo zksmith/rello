@@ -23,13 +23,10 @@ export const addCollection = title => {
   };
 };
 
-export const deleteCollection = collectionId => {
-  return {
-    type: DELETE_COLLECTION,
-    payload: collectionId
-  };
-};
-
+export const deleteCollection = collectionId => ({
+  type: DELETE_COLLECTION,
+  payload: collectionId
+});
 export const moveCollection = (
   sourceIndex,
   destinationIndex,
@@ -39,12 +36,10 @@ export const moveCollection = (
   payload: { sourceIndex, destinationIndex, collectionId }
 });
 
-export const addTaskIdToCollection = (taskId, collectionId) => {
-  return {
-    type: ADD_TASK_ID_TO_COLLECTION,
-    payload: { collectionId, taskId }
-  };
-};
+export const addTaskIdToCollection = (taskId, collectionId) => ({
+  type: ADD_TASK_ID_TO_COLLECTION,
+  payload: { collectionId, taskId }
+});
 
 //Handle Task Drag and Drop
 export const moveTask = ({
@@ -53,22 +48,18 @@ export const moveTask = ({
   taskId,
   sourceIndex,
   destinationIndex
-}) => {
-  return {
-    type: MOVE_TASK,
-    payload: {
-      collectionId,
-      prevCollectionId,
-      taskId,
-      sourceIndex,
-      destinationIndex
-    }
-  };
-};
+}) => ({
+  type: MOVE_TASK,
+  payload: {
+    collectionId,
+    prevCollectionId,
+    taskId,
+    sourceIndex,
+    destinationIndex
+  }
+});
 
-export const removeTaskId = ({ collectionId, taskId }) => {
-  return {
-    type: REMOVE_TASK_ID_FROM_COLLECTION,
-    payload: { collectionId, taskId }
-  };
-};
+export const removeTaskId = ({ collectionId, taskId }) => ({
+  type: REMOVE_TASK_ID_FROM_COLLECTION,
+  payload: { collectionId, taskId }
+});

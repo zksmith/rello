@@ -31,13 +31,12 @@ const boardReducer = (state = INITIAL_STATE, action) => {
     }
 
     case DELETE_TASK: {
-      const { taskId } = action.payload;
       const newTasks = { ...state.tasks };
-      delete newTasks[taskId];
+      delete newTasks[action.payload];
 
       return {
         ...state,
-        tasks: newTasks
+        tasks: { ...newTasks }
       };
     }
     default:

@@ -5,16 +5,12 @@ export const setBoardName = name => ({
   payload: name
 });
 
-export const addTask = (id, { subject, content }) => {
-  return {
-    type: ADD_TASK,
-    payload: { id, subject, content }
-  };
-};
+export const addTask = (id, { subject, content }) => ({
+  type: ADD_TASK,
+  payload: { id, subject, content }
+});
 
-export const deleteTask = taskId => {
-  return {
-    type: DELETE_TASK,
-    payload: taskId
-  };
-};
+export const deleteTask = taskId => ({
+  type: DELETE_TASK,
+  payload: taskId
+});
