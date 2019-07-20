@@ -6,7 +6,8 @@ import {
   ADD_COLLECTION,
   MOVE_TASK,
   DELETE_COLLECTION,
-  REMOVE_TASK_ID_FROM_COLLECTION
+  REMOVE_TASK_ID_FROM_COLLECTION,
+  MOVE_COLLECTION
 } from '../types';
 
 export const setCollections = collections => ({
@@ -28,6 +29,15 @@ export const deleteCollection = collectionId => {
     payload: collectionId
   };
 };
+
+export const moveCollection = (
+  sourceIndex,
+  destinationIndex,
+  collectionId
+) => ({
+  type: MOVE_COLLECTION,
+  payload: { sourceIndex, destinationIndex, collectionId }
+});
 
 export const addTaskIdToCollection = (taskId, collectionId) => {
   return {

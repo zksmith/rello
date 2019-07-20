@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
 
@@ -6,7 +7,7 @@ import Collection from '../collection/Collection';
 
 import { addCollection } from '../../redux/actions/collectionActions';
 
-const CollectionsContainer = ({ collections, addCollection }) => {
+const CollectionsContainer = ({ addCollection, collectionOrder }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
   const [newCollectionTitle, setNewCollectionTitle] = useState('');
 
@@ -22,38 +23,50 @@ const CollectionsContainer = ({ collections, addCollection }) => {
   };
 
   return (
-    <section className='collections-container'>
-      {Object.keys(collections).map(key => (
-        <Collection
-          key={collections[key].id}
-          collectionName={collections[key].title}
-          collectionId={collections[key].id}
-          taskIds={collections[key].taskIds}
-        />
-      ))}
+    <Droppable
+      droppableId='all-collections'
+      direction='horizontal'
+      type='collection'
+    >
+      {provided => (
+        <section
+          className='collections-container'
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+        >
+          {collectionOrder.map((collectionId, index) => (
+            <Collection
+              key={collectionId}
+              index={index}
+              collectionId={collectionId}
+            />
+          ))}
+          {provided.placeholder}
 
-      {/* TODO: Move this to sepertate  component and place in board.js */}
-      {collectionAddInProgress ? (
-        <form onSubmit={handleCollectionAdd}>
-          <input
-            type='text'
-            placeholder='Collection Title'
-            autoFocus
-            onChange={e => setNewCollectionTitle(e.target.value)}
-            onBlur={handleCollectionAdd}
-          />
-        </form>
-      ) : (
-        <button onClick={() => setCollectionAddInProgress(true)}>
-          + Add Collection
-        </button>
+          {/* TODO: Move this to sepertate  component and place in board.js */}
+          {collectionAddInProgress ? (
+            <form onSubmit={handleCollectionAdd}>
+              <input
+                type='text'
+                placeholder='Collection Title'
+                autoFocus
+                onChange={e => setNewCollectionTitle(e.target.value)}
+                onBlur={handleCollectionAdd}
+              />
+            </form>
+          ) : (
+            <button onClick={() => setCollectionAddInProgress(true)}>
+              + Add Collection
+            </button>
+          )}
+        </section>
       )}
-    </section>
+    </Droppable>
   );
 };
 
 const mapStateToProps = state => ({
-  collections: state.collectionState.collections
+  collectionOrder: state.collectionState.collectionOrder
 });
 
 const mapDispatchToProps = dispatch => ({

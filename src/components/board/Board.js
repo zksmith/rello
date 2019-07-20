@@ -2,16 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { moveTask, removeTaskId } from '../../redux/actions/collectionActions';
+import {
+  moveTask,
+  removeTaskId,
+  moveCollection
+} from '../../redux/actions/collectionActions';
 
 import CollectionsContainer from '../collections-container/CollectionsContainer';
 
 import './Board.scss';
 
-const Board = ({ boardName, moveTask, removeTaskId }) => {
+const Board = ({ boardName, moveTask, moveCollection, removeTaskId }) => {
   //Handles all Drag and Drop functionality TODO: clean names
   const onDragEnd = result => {
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
     if (!destination) return;
     if (
       destination.droppableId === source.droppableId &&
@@ -19,17 +23,22 @@ const Board = ({ boardName, moveTask, removeTaskId }) => {
     ) {
       return;
     }
-    if (destination.droppableId !== source.droppableId) {
-      removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
-    }
 
-    moveTask({
-      collectionId: destination.droppableId,
-      prevCollectionId: source.droppableId,
-      taskId: draggableId,
-      sourceIndex: source.index,
-      destinationIndex: destination.index
-    });
+    if (type === 'task') {
+      if (destination.droppableId !== source.droppableId) {
+        removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
+      }
+
+      moveTask({
+        collectionId: destination.droppableId,
+        prevCollectionId: source.droppableId,
+        taskId: draggableId,
+        sourceIndex: source.index,
+        destinationIndex: destination.index
+      });
+    } else {
+      moveCollection(source.index, destination.index, draggableId);
+    }
   };
 
   return (
@@ -50,6 +59,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   moveTask: args => dispatch(moveTask(args)),
+  moveCollection: (sourceIndex, destinationIndex, collectionId) =>
+    dispatch(moveCollection(sourceIndex, destinationIndex, collectionId)),
   removeTaskId: args => dispatch(removeTaskId(args))
 });
 

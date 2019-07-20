@@ -5,13 +5,9 @@
 html,
 body {
   height: 100%;
-}
-html {
   overflow: hidden;
 }
 body {
-  overflow-x: auto;
-  overflow-y: hidden;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

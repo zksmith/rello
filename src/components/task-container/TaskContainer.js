@@ -9,7 +9,7 @@ import TaskAddButton from '../task-add-button/TaskAddButton';
 const TaskContainer = ({ tasks, collectionId }) => {
   return (
     <>
-      <Droppable droppableId={collectionId}>
+      <Droppable droppableId={collectionId} type='task'>
         {provided => (
           <div
             className='task-container'

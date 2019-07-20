@@ -3,18 +3,33 @@ import {
   ADD_COLLECTION,
   DELETE_COLLECTION,
   MOVE_TASK,
-  REMOVE_TASK_ID_FROM_COLLECTION
+  REMOVE_TASK_ID_FROM_COLLECTION,
+  MOVE_COLLECTION
 } from '../types';
 
 const INITIAL_STATE = {
   collections: {
     sample_collection: {
       id: 'sample_collection',
-      title: 'Sample Collection',
+      title: 'Up Next',
       taskIds: ['sample_task']
+    },
+    sample_collection2: {
+      id: 'sample_collection2',
+      title: 'In Progress',
+      taskIds: []
+    },
+    sample_collection3: {
+      id: 'sample_collection3',
+      title: 'Done',
+      taskIds: []
     }
   },
-  collectionOrder: ['sample_collection']
+  collectionOrder: [
+    'sample_collection',
+    'sample_collection2',
+    'sample_collection3'
+  ]
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {
@@ -33,7 +48,24 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        collections: { ...newCollections }
+        collections: { ...newCollections },
+        collectionOrder: state.collectionOrder.filter(
+          id => id !== action.payload
+        )
+      };
+    }
+    case MOVE_COLLECTION: {
+      const newCollectionOrder = [...state.collectionOrder];
+      newCollectionOrder.splice(action.payload.sourceIndex, 1);
+      newCollectionOrder.splice(
+        action.payload.destinationIndex,
+        0,
+        action.payload.collectionId
+      );
+
+      return {
+        ...state,
+        collectionOrder: newCollectionOrder
       };
     }
     case ADD_TASK_ID_TO_COLLECTION: {
@@ -54,17 +86,15 @@ const boardReducer = (state = INITIAL_STATE, action) => {
     }
     case REMOVE_TASK_ID_FROM_COLLECTION: {
       const { collectionId, taskId } = action.payload;
-      const newTaskIds = state.collections[collectionId].taskIds.filter(
-        id => id !== taskId
-      );
-
       return {
         ...state,
         collections: {
           ...state.collections,
           [collectionId]: {
             ...state.collections[collectionId],
-            taskIds: newTaskIds
+            taskIds: state.collections[collectionId].taskIds.filter(
+              id => id !== taskId
+            )
           }
         }
       };
