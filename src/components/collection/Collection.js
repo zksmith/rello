@@ -36,7 +36,6 @@ const Collection = ({
               &#9932;
             </span>
           </p>
-
           <TaskContainer collectionId={collectionId} />
         </article>
       )}

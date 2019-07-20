@@ -1,11 +1,11 @@
 .board {
-  height: 97vh;
-  margin: 15px 10px;
-  padding-top: 45px;
-  overflow-x: auto;
+  margin: 0 10px;
+  height: calc(100vh - 52px); //52 = header height(47)+15 margin on board header
+  display: flex;
+  flex-direction: column;
 
   .board-header {
-    position: fixed;
+    margin: 15px 0;
 
     .board-name {
       background: rgba(0, 0, 0, 0.3);

@@ -40,7 +40,8 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         collections: {
           ...state.collections,
           [action.payload.id]: { ...action.payload }
-        }
+        },
+        collectionOrder: [...state.collectionOrder, action.payload.id]
       };
     case DELETE_COLLECTION: {
       const newCollections = { ...state.collections };
