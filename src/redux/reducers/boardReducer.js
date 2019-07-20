@@ -1,10 +1,7 @@
-import { SET_BOARD_NAME, ADD_TASK, DELETE_TASK } from '../types';
+import { SET_BOARD_NAME } from '../types';
 
 const INITIAL_STATE = {
-  boardName: 'Kanban Board',
-  tasks: {
-    sample_task: { id: 'sample_task', subject: 'Sample Task', content: '' }
-  }
+  boardName: 'Kanban Board'
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {
@@ -14,31 +11,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         ...state,
         boardName: action.payload
       };
-    case ADD_TASK: {
-      const { id, subject, content } = action.payload;
 
-      return {
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [id]: {
-            id,
-            subject,
-            content
-          }
-        }
-      };
-    }
-
-    case DELETE_TASK: {
-      const newTasks = { ...state.tasks };
-      delete newTasks[action.payload];
-
-      return {
-        ...state,
-        tasks: { ...newTasks }
-      };
-    }
     default:
       return state;
   }

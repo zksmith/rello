@@ -37,7 +37,7 @@ const TaskContainer = ({ tasks, collectionId }) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     tasks: state.collectionState.collections[ownProps.collectionId].taskIds.map(
-      id => state.board.tasks[id]
+      id => state.collectionState.tasks[id]
     )
   };
 };

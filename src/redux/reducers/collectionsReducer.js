@@ -4,33 +4,14 @@ import {
   DELETE_COLLECTION,
   MOVE_TASK,
   REMOVE_TASK_ID_FROM_COLLECTION,
-  MOVE_COLLECTION
+  MOVE_COLLECTION,
+  ADD_TASK,
+  DELETE_TASK
 } from '../types';
+import SAMPLE_DATA from '../../sample-data/sampleData';
+import { deleteTasks } from './utils';
 
-const INITIAL_STATE = {
-  collections: {
-    sample_collection: {
-      id: 'sample_collection',
-      title: 'Up Next',
-      taskIds: ['sample_task']
-    },
-    sample_collection2: {
-      id: 'sample_collection2',
-      title: 'In Progress',
-      taskIds: []
-    },
-    sample_collection3: {
-      id: 'sample_collection3',
-      title: 'Done',
-      taskIds: []
-    }
-  },
-  collectionOrder: [
-    'sample_collection',
-    'sample_collection2',
-    'sample_collection3'
-  ]
-};
+const INITIAL_STATE = SAMPLE_DATA;
 
 const boardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -52,6 +33,10 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         collections: { ...newCollections },
         collectionOrder: state.collectionOrder.filter(
           id => id !== action.payload
+        ),
+        tasks: deleteTasks(
+          state.collections[action.payload].taskIds,
+          state.tasks
         )
       };
     }
@@ -125,6 +110,31 @@ const boardReducer = (state = INITIAL_STATE, action) => {
             taskIds: newTaskIds
           }
         }
+      };
+    }
+    case ADD_TASK: {
+      const { id, subject, content } = action.payload;
+
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [id]: {
+            id,
+            subject,
+            content
+          }
+        }
+      };
+    }
+
+    case DELETE_TASK: {
+      const newTasks = { ...state.tasks };
+      delete newTasks[action.payload];
+
+      return {
+        ...state,
+        tasks: { ...newTasks }
       };
     }
     default:

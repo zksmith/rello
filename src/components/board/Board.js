@@ -61,7 +61,7 @@ const Board = ({
 
 const mapStateToProps = state => ({
   boardName: state.board.boardName,
-  totalTasks: Object.keys(state.board.tasks).length
+  totalTasks: Object.keys(state.collectionState.tasks).length
 });
 
 const mapDispatchToProps = dispatch => ({
