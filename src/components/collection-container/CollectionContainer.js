@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import './CollectionsContainer.scss';
 import { connect } from 'react-redux';
 
-import Collection from '../collection/Collection';
+import Collection from './Collection';
+import './CollectionContainer.scss';
 
 import { addCollection } from '../../redux/actions/collectionActions';
 

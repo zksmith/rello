@@ -8,12 +8,11 @@ import {
   moveCollection
 } from '../../redux/actions/collectionActions';
 
-import CollectionsContainer from '../collections-container/CollectionsContainer';
+import CollectionsContainer from '../collection-container/CollectionContainer';
 
 import './Board.scss';
 
 const Board = ({ boardName, moveTask, moveCollection, removeTaskId }) => {
-  //Handles all Drag and Drop functionality TODO: clean names
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
     if (!destination) return;

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
 import './TaskContainer.scss';
-import Task from '../task/Task';
-import TaskAddButton from '../task-add-button/TaskAddButton';
+import Task from './Task';
+import TaskAddButton from './TaskAddButton';
 
 const TaskContainer = ({ tasks, collectionId }) => {
   return (

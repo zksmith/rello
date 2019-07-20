@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
-import GoogleButton from '../google-button/GoogleButton';
+import GoogleButton from './google-button/GoogleButton';
 
 import './Header.scss';
 
