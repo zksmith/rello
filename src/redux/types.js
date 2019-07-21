@@ -12,3 +12,5 @@ export const ADD_TASK = 'ADD_TASK';
 export const MOVE_TASK = 'MOVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const FILTER_TASKS = 'FILTER_TASKS';
+
+export const REHYDRATE = 'persist/REHYDRATE';

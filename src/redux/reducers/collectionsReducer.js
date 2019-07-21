@@ -7,7 +7,8 @@ import {
   MOVE_COLLECTION,
   ADD_TASK,
   DELETE_TASK,
-  FILTER_TASKS
+  FILTER_TASKS,
+  REHYDRATE
 } from '../types';
 import SAMPLE_DATA from '../../sample-data/sampleData';
 import { deleteTasks } from './utils';
@@ -148,6 +149,15 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         ...state,
         filter: action.payload
       };
+    case REHYDRATE:
+      var incoming = action.payload.collectionState;
+      if (incoming)
+        return {
+          ...state,
+          ...incoming,
+          filter: state.filter
+        };
+      return state;
     default:
       return state;
   }

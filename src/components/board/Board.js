@@ -1,26 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import {
   moveTask,
   removeTaskId,
-  moveCollection,
-  filterTasks
+  moveCollection
 } from '../../redux/actions/collectionActions';
 
 import CollectionsContainer from '../collection-container/CollectionContainer';
 
+import BoardHeader from './BoardHeader';
 import './Board.scss';
 
-const Board = ({
-  boardName,
-  totalTasks,
-  moveTask,
-  moveCollection,
-  removeTaskId,
-  filterTasks
-}) => {
+const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result;
     if (!destination) return;
@@ -48,18 +41,9 @@ const Board = ({
     }
   };
 
-  useEffect(() => {
-    filterTasks('');
-    //eslint-disable-next-line
-  }, []);
-
   return (
     <main className='board'>
-      <section className='board-header'>
-        <strong className='board-name'>{boardName}</strong>
-        <span className='board-name'>Total Tasks: {totalTasks}</span>
-        <input type='text' onChange={e => filterTasks(e.target.value)} />
-      </section>
+      <BoardHeader />
       <DragDropContext onDragEnd={onDragEnd}>
         <CollectionsContainer />
       </DragDropContext>
@@ -67,20 +51,14 @@ const Board = ({
   );
 };
 
-const mapStateToProps = state => ({
-  boardName: state.board.boardName,
-  totalTasks: Object.keys(state.collectionState.tasks).length
-});
-
 const mapDispatchToProps = dispatch => ({
   moveTask: args => dispatch(moveTask(args)),
   moveCollection: (sourceIndex, destinationIndex, collectionId) =>
     dispatch(moveCollection(sourceIndex, destinationIndex, collectionId)),
-  removeTaskId: args => dispatch(removeTaskId(args)),
-  filterTasks: text => dispatch(filterTasks(text))
+  removeTaskId: args => dispatch(removeTaskId(args))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Board);
