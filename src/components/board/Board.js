@@ -4,7 +4,6 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import {
   moveTask,
-  removeTaskId,
   moveCollection
 } from '../../redux/actions/collectionActions';
 
@@ -25,10 +24,6 @@ const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
     }
 
     if (type === 'task') {
-      if (destination.droppableId !== source.droppableId) {
-        removeTaskId({ collectionId: source.droppableId, taskId: draggableId });
-      }
-
       moveTask({
         collectionId: destination.droppableId,
         prevCollectionId: source.droppableId,
@@ -54,8 +49,7 @@ const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
 const mapDispatchToProps = dispatch => ({
   moveTask: args => dispatch(moveTask(args)),
   moveCollection: (sourceIndex, destinationIndex, collectionId) =>
-    dispatch(moveCollection(sourceIndex, destinationIndex, collectionId)),
-  removeTaskId: args => dispatch(removeTaskId(args))
+    dispatch(moveCollection(sourceIndex, destinationIndex, collectionId))
 });
 
 export default connect(

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import uuidv4 from 'uuid';
 
-import { addTaskIdToCollection } from '../../redux/actions/collectionActions';
 import { addTask } from '../../redux/actions/boardActions';
 
 const TaskAddButton = ({ addTask }) => {
@@ -38,9 +37,8 @@ const TaskAddButton = ({ addTask }) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addTask: task => {
-    const id = uuidv4();
-    dispatch(addTask(id, task));
-    dispatch(addTaskIdToCollection(id, ownProps.collectionId));
+    const taskId = uuidv4();
+    dispatch(addTask(ownProps.collectionId, taskId, task));
   }
 });
 

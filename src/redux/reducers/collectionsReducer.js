@@ -1,9 +1,7 @@
 import {
-  ADD_TASK_ID_TO_COLLECTION,
   ADD_COLLECTION,
   DELETE_COLLECTION,
   MOVE_TASK,
-  REMOVE_TASK_ID_FROM_COLLECTION,
   MOVE_COLLECTION,
   ADD_TASK,
   DELETE_TASK,
@@ -11,7 +9,7 @@ import {
   REHYDRATE
 } from '../types';
 import SAMPLE_DATA from '../../sample-data/sampleData';
-import { deleteTasks } from './utils';
+import { deleteTasks, deleteItem } from './utils';
 
 const INITIAL_STATE = {
   collections: SAMPLE_DATA.collections,
@@ -31,13 +29,10 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         },
         collectionOrder: [...state.collectionOrder, action.payload.id]
       };
-    case DELETE_COLLECTION: {
-      const newCollections = { ...state.collections };
-      delete newCollections[action.payload];
-
+    case DELETE_COLLECTION:
       return {
         ...state,
-        collections: { ...newCollections },
+        collections: deleteItem(action.payload, state.collections),
         collectionOrder: state.collectionOrder.filter(
           id => id !== action.payload
         ),
@@ -46,7 +41,6 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           state.tasks
         )
       };
-    }
     case MOVE_COLLECTION: {
       const newCollectionOrder = [...state.collectionOrder];
       newCollectionOrder.splice(action.payload.sourceIndex, 1);
@@ -59,37 +53,6 @@ const boardReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         collectionOrder: newCollectionOrder
-      };
-    }
-    case ADD_TASK_ID_TO_COLLECTION: {
-      const { collectionId, taskId } = action.payload;
-
-      const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
-
-      return {
-        ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
-        }
-      };
-    }
-    case REMOVE_TASK_ID_FROM_COLLECTION: {
-      const { collectionId, taskId } = action.payload;
-      return {
-        ...state,
-        collections: {
-          ...state.collections,
-          [collectionId]: {
-            ...state.collections[collectionId],
-            taskIds: state.collections[collectionId].taskIds.filter(
-              id => id !== taskId
-            )
-          }
-        }
       };
     }
     case MOVE_TASK: {
@@ -115,46 +78,65 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           [collectionId]: {
             ...state.collections[collectionId],
             taskIds: newTaskIds
+          },
+          [prevCollectionId]: {
+            ...state.collections[prevCollectionId],
+            taskIds:
+              prevCollectionId !== collectionId
+                ? state.collections[prevCollectionId].taskIds.filter(
+                    id => id !== taskId
+                  )
+                : newTaskIds
           }
         }
       };
     }
     case ADD_TASK: {
-      const { id, subject, content } = action.payload;
+      const { collectionId, taskId, subject, content } = action.payload;
+      const newTaskIds = [...state.collections[collectionId].taskIds, taskId];
 
       return {
         ...state,
+        collections: {
+          ...state.collections,
+          [collectionId]: {
+            ...state.collections[collectionId],
+            taskIds: newTaskIds
+          }
+        },
         tasks: {
           ...state.tasks,
-          [id]: {
-            id,
+          [taskId]: {
+            id: taskId,
             subject,
             content
           }
         }
       };
     }
-
-    case DELETE_TASK: {
-      const newTasks = { ...state.tasks };
-      delete newTasks[action.payload];
-
+    case DELETE_TASK:
       return {
         ...state,
-        tasks: { ...newTasks }
+        tasks: deleteItem(action.payload.taskId, state.tasks),
+        collections: {
+          ...state.collections,
+          [action.payload.collectionId]: {
+            ...state.collections[action.payload.collectionId],
+            taskIds: state.collections[
+              action.payload.collectionId
+            ].taskIds.filter(id => id !== action.payload.taskId)
+          }
+        }
       };
-    }
     case FILTER_TASKS:
       return {
         ...state,
         filter: action.payload
       };
     case REHYDRATE:
-      var incoming = action.payload.collectionState;
-      if (incoming)
+      if (action.payload)
         return {
-          ...state,
-          ...incoming,
+          ...action.payload.collectionState,
           filter: state.filter
         };
       return state;

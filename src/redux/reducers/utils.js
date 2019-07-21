@@ -5,3 +5,9 @@ export const deleteTasks = (taskIds, currentTasks) => {
   });
   return newTasks;
 };
+
+export const deleteItem = (itemKey, object) => {
+  const prevObject = { ...object };
+  delete prevObject[itemKey];
+  return prevObject;
+};

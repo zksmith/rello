@@ -2,11 +2,9 @@ import uuidv4 from 'uuid';
 
 import {
   SET_COLLECTIONS,
-  ADD_TASK_ID_TO_COLLECTION,
   ADD_COLLECTION,
   MOVE_TASK,
   DELETE_COLLECTION,
-  REMOVE_TASK_ID_FROM_COLLECTION,
   MOVE_COLLECTION,
   FILTER_TASKS
 } from '../types';
@@ -37,11 +35,6 @@ export const moveCollection = (
   payload: { sourceIndex, destinationIndex, collectionId }
 });
 
-export const addTaskIdToCollection = (taskId, collectionId) => ({
-  type: ADD_TASK_ID_TO_COLLECTION,
-  payload: { collectionId, taskId }
-});
-
 //Handle Task Drag and Drop
 export const moveTask = ({
   collectionId,
@@ -58,11 +51,6 @@ export const moveTask = ({
     sourceIndex,
     destinationIndex
   }
-});
-
-export const removeTaskId = ({ collectionId, taskId }) => ({
-  type: REMOVE_TASK_ID_FROM_COLLECTION,
-  payload: { collectionId, taskId }
 });
 
 export const filterTasks = text => ({

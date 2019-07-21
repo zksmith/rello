@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { removeTaskId } from '../../redux/actions/collectionActions';
 import { deleteTask } from '../../redux/actions/boardActions';
 
 import './Task.scss';
@@ -39,8 +38,7 @@ const Task = ({ task: { id, subject }, collectionId, index, deleteTask }) => {
 
 const mapDispatchToProps = dispatch => ({
   deleteTask: (collectionId, id) => {
-    dispatch(removeTaskId({ collectionId, taskId: id }));
-    dispatch(deleteTask(id));
+    dispatch(deleteTask(collectionId, id));
   }
 });
 
