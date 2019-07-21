@@ -35,11 +35,12 @@ const TaskContainer = ({ filterdTasks, collectionId }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const allTasks = state.collectionState.collections[
+  const tasksInCollection = state.collectionState.collections[
     ownProps.collectionId
   ].taskIds.map(id => state.collectionState.tasks[id]);
+
   return {
-    filterdTasks: allTasks.filter(task =>
+    filterdTasks: tasksInCollection.filter(task =>
       task.subject.includes(state.collectionState.filter)
     )
   };
