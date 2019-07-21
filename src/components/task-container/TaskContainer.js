@@ -6,7 +6,7 @@ import './TaskContainer.scss';
 import Task from './Task';
 import TaskAddButton from './TaskAddButton';
 
-const TaskContainer = ({ tasks, collectionId }) => {
+const TaskContainer = ({ filterdTasks, collectionId }) => {
   return (
     <>
       <Droppable droppableId={collectionId} type='task'>
@@ -16,8 +16,8 @@ const TaskContainer = ({ tasks, collectionId }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {tasks &&
-              tasks.map((task, index) => (
+            {filterdTasks &&
+              filterdTasks.map((task, index) => (
                 <Task
                   key={task.id}
                   task={task}
@@ -35,9 +35,12 @@ const TaskContainer = ({ tasks, collectionId }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const allTasks = state.collectionState.collections[
+    ownProps.collectionId
+  ].taskIds.map(id => state.collectionState.tasks[id]);
   return {
-    tasks: state.collectionState.collections[ownProps.collectionId].taskIds.map(
-      id => state.collectionState.tasks[id]
+    filterdTasks: allTasks.filter(task =>
+      task.subject.includes(state.collectionState.filter)
     )
   };
 };

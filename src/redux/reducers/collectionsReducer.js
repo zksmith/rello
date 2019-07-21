@@ -6,12 +6,18 @@ import {
   REMOVE_TASK_ID_FROM_COLLECTION,
   MOVE_COLLECTION,
   ADD_TASK,
-  DELETE_TASK
+  DELETE_TASK,
+  FILTER_TASKS
 } from '../types';
 import SAMPLE_DATA from '../../sample-data/sampleData';
 import { deleteTasks } from './utils';
 
-const INITIAL_STATE = SAMPLE_DATA;
+const INITIAL_STATE = {
+  collections: SAMPLE_DATA.collections,
+  collectionOrder: SAMPLE_DATA.collectionOrder,
+  tasks: SAMPLE_DATA.tasks,
+  filter: ''
+};
 
 const boardReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -137,6 +143,11 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         tasks: { ...newTasks }
       };
     }
+    case FILTER_TASKS:
+      return {
+        ...state,
+        filter: action.payload
+      };
     default:
       return state;
   }
