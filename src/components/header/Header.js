@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import GoogleButton from './google-button/GoogleButton';
 
 import './Header.scss';
+import { auth } from '../../firebase/firebase.utils';
 
 const Header = ({ user }) => {
   return (
@@ -13,8 +14,11 @@ const Header = ({ user }) => {
         <h1>Rello</h1>
       </span>
       {user ? (
-        <span style={{ position: 'fixed', right: '0', padding: '10px' }}>
-          {user.displayName}, Sign Out
+        <span
+          style={{ position: 'fixed', right: '0', padding: '10px' }}
+          onClick={() => auth.signOut()}
+        >
+          Sign Out
         </span>
       ) : (
         <GoogleButton />
