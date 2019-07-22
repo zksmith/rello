@@ -131,7 +131,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
     case FILTER_TASKS:
       return {
         ...state,
-        filter: action.payload
+        filter: action.payload.toLowerCase()
       };
     case REHYDRATE:
       if (action.payload)

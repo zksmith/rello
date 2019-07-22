@@ -41,7 +41,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     filterdTasks: tasksInCollection.filter(task =>
-      task.subject.includes(state.collectionState.filter)
+      task.subject.toLowerCase().includes(state.collectionState.filter)
     )
   };
 };
