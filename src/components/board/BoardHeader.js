@@ -8,7 +8,11 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks }) => {
     <section className='board-header'>
       <strong className='board-name'>{boardName}</strong>
       <span className='board-name'>Total Tasks: {totalTasks}</span>
-      <input type='text' onChange={e => filterTasks(e.target.value)} />
+      <input
+        type='text'
+        placeholder='Search Tasks'
+        onChange={e => filterTasks(e.target.value)}
+      />
     </section>
   );
 };

@@ -24,6 +24,7 @@ const TaskAddButton = ({ addTask }) => {
           value={newTaskText}
           onChange={e => setNewTaskText(e.target.value)}
           onBlur={handleAddTask}
+          placeholder='Task Subject'
           autoFocus
         />
       </form>
