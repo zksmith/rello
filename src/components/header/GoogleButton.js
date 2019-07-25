@@ -1,5 +1,5 @@
 import React from 'react';
-import { signInWithGoogle } from '../../../firebase/firebase.utils';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 import './GoogleButton.scss';
 
