@@ -43,7 +43,6 @@ const CollectionsContainer = ({ addCollection, collectionOrder }) => {
           ))}
           {provided.placeholder}
 
-          {/* TODO: Move this to sepertate  component and place in board.js */}
           {collectionAddInProgress ? (
             <form onSubmit={handleCollectionAdd}>
               <input

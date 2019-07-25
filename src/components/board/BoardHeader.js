@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { filterTasks } from '../../redux/actions/collectionActions';
 
+import './BoardHeader.scss';
+
 const BoardHeader = ({ boardName, totalTasks, filterTasks }) => {
   return (
     <section className='board-header'>
