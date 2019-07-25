@@ -1,5 +1,7 @@
 .board-header {
   margin: 15px 0;
+  display: flex;
+  align-items: center;
 
   .board-name {
     margin-right: 10px;
@@ -7,5 +9,12 @@
     border-radius: 3px;
     font-size: 1.3em;
     padding: 5px;
+  }
+
+  input {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
   }
 }
