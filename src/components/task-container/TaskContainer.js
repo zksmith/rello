@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
 
 import './TaskContainer.scss';
 import Task from './Task';
-import TaskAddButton from './TaskAddButton';
+import TaskAddForm from './TaskAddForm';
 
 const TaskContainer = ({ filterdTasks, collectionId }) => {
+  const [taskAddInProgress, setTaskAddInProgress] = useState(false);
+
   return (
     <>
       <Droppable droppableId={collectionId} type='task'>
@@ -29,7 +31,20 @@ const TaskContainer = ({ filterdTasks, collectionId }) => {
           </div>
         )}
       </Droppable>
-      <TaskAddButton collectionId={collectionId} />
+      {/* TODO: Move task form to seperate component and place the button here */}
+      {taskAddInProgress ? (
+        <TaskAddForm
+          collectionId={collectionId}
+          setTaskAddInProgress={setTaskAddInProgress}
+        />
+      ) : (
+        <button
+          className='add-button'
+          onClick={() => setTaskAddInProgress(true)}
+        >
+          + Add another task
+        </button>
+      )}
     </>
   );
 };

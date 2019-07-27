@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import uuidv4 from 'uuid';
 
 import { addTask } from '../../redux/actions/boardActions';
+import './TaskAddForm.scss';
 
-const TaskAddButton = ({ addTask }) => {
-  const [taskAddInProgress, setTaskAddInProgress] = useState(false);
+const TaskAddButton = ({ addTask, setTaskAddInProgress }) => {
   const [newTaskText, setNewTaskText] = useState('');
 
   const handleAddTask = e => {
@@ -15,24 +15,24 @@ const TaskAddButton = ({ addTask }) => {
     setTaskAddInProgress(false);
     setNewTaskText('');
   };
-
-  if (taskAddInProgress)
-    return (
-      <form onSubmit={handleAddTask}>
-        <input
-          style={{ width: '100%' }}
-          value={newTaskText}
-          onChange={e => setNewTaskText(e.target.value)}
-          onBlur={handleAddTask}
-          placeholder='Task Subject'
-          autoFocus
-        />
-      </form>
-    );
   return (
-    <button className='add-button' onClick={() => setTaskAddInProgress(true)}>
-      + Add another task
-    </button>
+    <form onSubmit={handleAddTask} className='task-add-form'>
+      <input
+        value={newTaskText}
+        onChange={e => setNewTaskText(e.target.value)}
+        placeholder='Task Subject'
+        autoFocus
+      />
+      <button className='add-button' type='submit'>
+        Add
+      </button>
+      <span
+        className='close-button'
+        onClick={() => setTaskAddInProgress(false)}
+      >
+        &#9932;
+      </span>
+    </form>
   );
 };
 

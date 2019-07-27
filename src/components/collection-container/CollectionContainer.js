@@ -42,22 +42,25 @@ const CollectionsContainer = ({ addCollection, collectionOrder }) => {
             />
           ))}
           {provided.placeholder}
-
-          {collectionAddInProgress ? (
-            <form onSubmit={handleCollectionAdd}>
-              <input
-                type='text'
-                placeholder='Collection Title'
-                autoFocus
-                onChange={e => setNewCollectionTitle(e.target.value)}
-                onBlur={handleCollectionAdd}
-              />
-            </form>
-          ) : (
-            <button onClick={() => setCollectionAddInProgress(true)}>
-              + Add Collection
-            </button>
-          )}
+          {/* TODO: move collection add form to seperate component */}
+          <div className='collection-add'>
+            {collectionAddInProgress ? (
+              <form onSubmit={handleCollectionAdd}>
+                <input
+                  type='text'
+                  placeholder='Collection Title'
+                  autoFocus
+                  onChange={e => setNewCollectionTitle(e.target.value)}
+                  onBlur={handleCollectionAdd}
+                  maxLength='25'
+                />
+              </form>
+            ) : (
+              <button onClick={() => setCollectionAddInProgress(true)}>
+                + Add Collection
+              </button>
+            )}
+          </div>
         </section>
       )}
     </Droppable>
