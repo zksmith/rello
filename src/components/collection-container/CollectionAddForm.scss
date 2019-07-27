@@ -1,0 +1,26 @@
+.collection-add-form {
+  input {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+
+  .collection-submit-button {
+    padding: 8px;
+    background-color: #008cba;
+    border: none;
+    color: white;
+    margin-right: 5px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .close-button {
+    cursor: pointer;
+  }
+}

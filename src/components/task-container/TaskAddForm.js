@@ -23,7 +23,7 @@ const TaskAddButton = ({ addTask, setTaskAddInProgress }) => {
         placeholder='Task Subject'
         autoFocus
       />
-      <button className='add-button' type='submit'>
+      <button className='task-submit-button' type='submit'>
         Add
       </button>
       <span

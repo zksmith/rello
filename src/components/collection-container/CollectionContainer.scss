@@ -3,20 +3,12 @@
   align-items: flex-start;
   flex: 1;
   overflow-x: auto;
-  .collection-add {
-    button {
-      padding: 5px;
-      border-radius: 3px;
-      border: 0px;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.3);
-    }
-    input {
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.3);
-      color: white;
-      border: none;
-      border-radius: 3px;
-    }
+
+  .collection-add-button {
+    padding: 5px;
+    border-radius: 3px;
+    border: 0px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
   }
 }

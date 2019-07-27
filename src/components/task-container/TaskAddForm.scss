@@ -7,11 +7,15 @@
   .close-button {
     cursor: pointer;
   }
-  .add-button {
+  .task-submit-button {
     padding: 8px;
     background-color: #008cba;
     border: none;
     color: white;
     margin-right: 5px;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
