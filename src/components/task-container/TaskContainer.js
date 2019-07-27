@@ -31,7 +31,6 @@ const TaskContainer = ({ filterdTasks, collectionId }) => {
           </div>
         )}
       </Droppable>
-      {/* TODO: Move task form to seperate component and place the button here */}
       {taskAddInProgress ? (
         <TaskAddForm
           collectionId={collectionId}
