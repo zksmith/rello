@@ -7,7 +7,6 @@ import { addCollection } from '../../redux/actions/collectionActions';
 const CollectionAddForm = ({ setCollectionAddInProgress, addCollection }) => {
   const [newCollectionTitle, setNewCollectionTitle] = useState('');
 
-  // If there is and input value add new collection
   const handleCollectionAdd = e => {
     e.preventDefault();
     if (newCollectionTitle) {

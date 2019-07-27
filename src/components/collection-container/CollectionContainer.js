@@ -6,7 +6,7 @@ import Collection from './Collection';
 import CollectionAddForm from './CollectionAddForm';
 import './CollectionContainer.scss';
 
-const CollectionsContainer = ({ addCollection, collectionOrder }) => {
+const CollectionsContainer = ({ collectionOrder }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
 
   return (
