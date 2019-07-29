@@ -29,7 +29,6 @@ const CollectionsContainer = ({ collectionOrder }) => {
             />
           ))}
           {provided.placeholder}
-          {/* TODO: move collection add form to seperate component */}
           {collectionAddInProgress ? (
             <CollectionAddForm
               setCollectionAddInProgress={setCollectionAddInProgress}
