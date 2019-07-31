@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { filterTasks } from '../../redux/actions/collectionActions';
+import { setBoardName } from '../../redux/actions/boardActions';
 
 import './BoardHeader.scss';
 
-const BoardHeader = ({ boardName, totalTasks, filterTasks }) => {
+const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
+  const [nameChange, setNameChange] = useState(false);
+  const [boardNameInput, setBoardNameInput] = useState(boardName);
+
   return (
+    // TODO: fix "board-name" class name
     <section className='board-header'>
-      <strong className='board-name'>{boardName}</strong>
+      {nameChange ? (
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            setBoardName(boardNameInput);
+            setNameChange(false);
+          }}
+        >
+          <input
+            type='text'
+            className='board-name'
+            value={boardNameInput}
+            autoFocus
+            onChange={e => setBoardNameInput(e.target.value)}
+            onBlur={() => {
+              setNameChange(false);
+              setBoardNameInput(boardName);
+            }}
+          />
+        </form>
+      ) : (
+        <strong className='board-name' onClick={() => setNameChange(true)}>
+          {boardName}
+        </strong>
+      )}
       <span className='board-name'>Total Tasks: {totalTasks}</span>
       <input
         type='text'
@@ -25,6 +54,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  setBoardName: text => dispatch(setBoardName(text)),
   filterTasks: text => dispatch(filterTasks(text))
 });
 
