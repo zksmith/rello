@@ -23,12 +23,12 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
         >
           <input
             type='text'
-            className='board-name'
+            style={{ marginRight: '5px' }}
             value={boardNameInput}
             autoFocus
             onChange={e => setBoardNameInput(e.target.value)}
             onBlur={() => {
-              setNameChange(false);
+              // setNameChange(false);
               setBoardNameInput(boardName);
             }}
           />
