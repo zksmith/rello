@@ -15,7 +15,12 @@ const Header = ({ user }) => {
       </span>
       {user ? (
         <span
-          style={{ position: 'fixed', right: '0', padding: '10px' }}
+          style={{
+            position: 'fixed',
+            right: '0',
+            padding: '10px',
+            cursor: 'border'
+          }}
           onClick={() => auth.signOut()}
         >
           Sign Out
