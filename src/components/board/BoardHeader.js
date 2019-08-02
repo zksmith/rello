@@ -11,7 +11,6 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
   const [boardNameInput, setBoardNameInput] = useState(boardName);
 
   return (
-    // TODO: fix "board-name" class name
     <section className='board-header'>
       {nameChange ? (
         <form
@@ -28,17 +27,20 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
             autoFocus
             onChange={e => setBoardNameInput(e.target.value)}
             onBlur={() => {
-              // setNameChange(false);
+              setNameChange(false);
               setBoardNameInput(boardName);
             }}
           />
         </form>
       ) : (
-        <strong className='board-name' onClick={() => setNameChange(true)}>
+        <strong
+          className='board-header-block'
+          onClick={() => setNameChange(true)}
+        >
           {boardName}
         </strong>
       )}
-      <span className='board-name'>Total Tasks: {totalTasks}</span>
+      <span className='board-header-block'>Total Tasks: {totalTasks}</span>
       <input
         type='text'
         placeholder='Search Tasks'

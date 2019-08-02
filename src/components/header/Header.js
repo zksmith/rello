@@ -19,7 +19,7 @@ const Header = ({ user }) => {
             position: 'fixed',
             right: '0',
             padding: '10px',
-            cursor: 'border'
+            cursor: 'pointer'
           }}
           onClick={() => auth.signOut()}
         >
