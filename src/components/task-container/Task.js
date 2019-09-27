@@ -28,7 +28,7 @@ const Task = ({ task: { id, subject }, collectionId, index, deleteTask }) => {
                 deleteTask(collectionId, id);
             }}
           >
-            &#9932;
+            X
           </span>
         </div>
       )}

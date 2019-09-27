@@ -33,7 +33,7 @@ const Collection = ({
                   deleteCollection();
               }}
             >
-              &#9932;
+              X
             </span>
           </p>
           <TaskContainer collectionId={collectionId} />
