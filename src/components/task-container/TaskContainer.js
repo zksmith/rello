@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Droppable } from 'react-beautiful-dnd';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Droppable } from "react-beautiful-dnd";
 
-import './TaskContainer.scss';
-import Task from './Task';
-import TaskAddForm from './TaskAddForm';
+import "./TaskContainer.scss";
+import Task from "./Task";
+import TaskAddForm from "./TaskAddForm";
 
 const TaskContainer = ({ filterdTasks, collectionId }) => {
   const [taskAddInProgress, setTaskAddInProgress] = useState(false);
 
   return (
     <>
-      <Droppable droppableId={collectionId} type='task'>
+      <Droppable droppableId={collectionId} type="task">
         {provided => (
           <div
-            className='task-container'
+            className="task-container"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -38,7 +38,7 @@ const TaskContainer = ({ filterdTasks, collectionId }) => {
         />
       ) : (
         <button
-          className='add-button'
+          className="add-button"
           onClick={() => setTaskAddInProgress(true)}
         >
           + Add another task

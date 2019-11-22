@@ -1,7 +1,7 @@
-import { SET_BOARD_NAME } from '../types';
+import { SET_BOARD_NAME } from "../types";
 
 const INITIAL_STATE = {
-  boardName: 'Kanban Board'
+  boardName: "Kanban Board"
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {

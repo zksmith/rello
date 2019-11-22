@@ -1,4 +1,4 @@
-import uuidv4 from 'uuid';
+import uuidv4 from "uuid";
 
 import {
   SET_COLLECTIONS,
@@ -7,7 +7,7 @@ import {
   DELETE_COLLECTION,
   MOVE_COLLECTION,
   FILTER_TASKS
-} from '../types';
+} from "../types";
 
 export const setCollections = collections => ({
   type: SET_COLLECTIONS,

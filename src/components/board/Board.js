@@ -1,16 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { DragDropContext } from 'react-beautiful-dnd';
+import React from "react";
+import { connect } from "react-redux";
+import { DragDropContext } from "react-beautiful-dnd";
 
 import {
   moveTask,
   moveCollection
-} from '../../redux/actions/collectionActions';
+} from "../../redux/actions/collectionActions";
 
-import CollectionsContainer from '../collection-container/CollectionContainer';
+import CollectionsContainer from "../collection-container/CollectionContainer";
 
-import BoardHeader from './BoardHeader';
-import './Board.scss';
+import BoardHeader from "./BoardHeader";
+import "./Board.scss";
 
 const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
   const onDragEnd = result => {
@@ -23,7 +23,7 @@ const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
       return;
     }
 
-    if (type === 'task') {
+    if (type === "task") {
       moveTask({
         collectionId: destination.droppableId,
         prevCollectionId: source.droppableId,
@@ -37,7 +37,7 @@ const Board = ({ totalTasks, moveTask, moveCollection, removeTaskId }) => {
   };
 
   return (
-    <main className='board'>
+    <main className="board">
       <BoardHeader />
       <DragDropContext onDragEnd={onDragEnd}>
         <CollectionsContainer />
@@ -52,7 +52,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(moveCollection(sourceIndex, destinationIndex, collectionId))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Board);
+export default connect(null, mapDispatchToProps)(Board);

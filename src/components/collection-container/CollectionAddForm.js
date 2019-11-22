@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import './CollectionAddForm.scss';
-import { addCollection } from '../../redux/actions/collectionActions';
+import "./CollectionAddForm.scss";
+import { addCollection } from "../../redux/actions/collectionActions";
 
 const CollectionAddForm = ({ setCollectionAddInProgress, addCollection }) => {
-  const [newCollectionTitle, setNewCollectionTitle] = useState('');
+  const [newCollectionTitle, setNewCollectionTitle] = useState("");
 
   const handleCollectionAdd = e => {
     e.preventDefault();
     if (newCollectionTitle) {
       addCollection(newCollectionTitle);
-      setNewCollectionTitle('');
+      setNewCollectionTitle("");
     }
 
     setCollectionAddInProgress(false);
   };
 
   return (
-    <form onSubmit={handleCollectionAdd} className='collection-add-form'>
+    <form onSubmit={handleCollectionAdd} className="collection-add-form">
       <input
-        type='text'
-        placeholder='Collection Title'
+        type="text"
+        placeholder="Collection Title"
         autoFocus
         onChange={e => setNewCollectionTitle(e.target.value)}
-        maxLength='25'
+        maxLength="25"
       />
-      <button className='collection-submit-button' type='submit'>
+      <button className="collection-submit-button" type="submit">
         Add
       </button>
       <span
-        className='close-button'
+        className="close-button"
         onClick={() => setCollectionAddInProgress(false)}
       >
         &#9932;
@@ -43,7 +43,4 @@ const mapDispatchToProps = dispatch => ({
   addCollection: title => dispatch(addCollection(title))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(CollectionAddForm);
+export default connect(null, mapDispatchToProps)(CollectionAddForm);

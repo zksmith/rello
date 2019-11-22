@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
-import { filterTasks } from '../../redux/actions/collectionActions';
-import { setBoardName } from '../../redux/actions/boardActions';
+import { filterTasks } from "../../redux/actions/collectionActions";
+import { setBoardName } from "../../redux/actions/boardActions";
 
-import './BoardHeader.scss';
+import "./BoardHeader.scss";
 
 const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
   const [nameChange, setNameChange] = useState(false);
   const [boardNameInput, setBoardNameInput] = useState(boardName);
 
   return (
-    <section className='board-header'>
+    <section className="board-header">
       {nameChange ? (
         <form
           onSubmit={e => {
@@ -21,8 +21,8 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
           }}
         >
           <input
-            type='text'
-            style={{ marginRight: '5px' }}
+            type="text"
+            style={{ marginRight: "5px" }}
             value={boardNameInput}
             autoFocus
             onChange={e => setBoardNameInput(e.target.value)}
@@ -34,16 +34,16 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
         </form>
       ) : (
         <strong
-          className='board-header-block'
+          className="board-header-block"
           onClick={() => setNameChange(true)}
         >
           {boardName}
         </strong>
       )}
-      <span className='board-header-block'>Total Tasks: {totalTasks}</span>
+      <span className="board-header-block">Total Tasks: {totalTasks}</span>
       <input
-        type='text'
-        placeholder='Search Tasks'
+        type="text"
+        placeholder="Search Tasks"
         onChange={e => filterTasks(e.target.value)}
       />
     </section>
@@ -60,7 +60,4 @@ const mapDispatchToProps = dispatch => ({
   filterTasks: text => dispatch(filterTasks(text))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BoardHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardHeader);

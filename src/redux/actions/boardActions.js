@@ -1,4 +1,4 @@
-import { SET_BOARD_NAME, DELETE_TASK, ADD_TASK } from '../types';
+import { SET_BOARD_NAME, DELETE_TASK, ADD_TASK } from "../types";
 
 export const setBoardName = name => ({
   type: SET_BOARD_NAME,

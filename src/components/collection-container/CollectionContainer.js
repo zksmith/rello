@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Droppable } from 'react-beautiful-dnd';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { Droppable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
 
-import Collection from './Collection';
-import CollectionAddForm from './CollectionAddForm';
-import './CollectionContainer.scss';
+import Collection from "./Collection";
+import CollectionAddForm from "./CollectionAddForm";
+import "./CollectionContainer.scss";
 
 const CollectionsContainer = ({ collectionOrder }) => {
   const [collectionAddInProgress, setCollectionAddInProgress] = useState(false);
 
   return (
     <Droppable
-      droppableId='all-collections'
-      direction='horizontal'
-      type='collection'
+      droppableId="all-collections"
+      direction="horizontal"
+      type="collection"
     >
       {provided => (
         <section
-          className='collections-container'
+          className="collections-container"
           {...provided.droppableProps}
           ref={provided.innerRef}
         >
@@ -35,7 +35,7 @@ const CollectionsContainer = ({ collectionOrder }) => {
             />
           ) : (
             <button
-              className='collection-add-button'
+              className="collection-add-button"
               onClick={() => setCollectionAddInProgress(true)}
             >
               + Add Collection

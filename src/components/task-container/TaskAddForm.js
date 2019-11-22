@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import uuidv4 from 'uuid';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import uuidv4 from "uuid";
 
-import { addTask } from '../../redux/actions/boardActions';
-import './TaskAddForm.scss';
+import { addTask } from "../../redux/actions/boardActions";
+import "./TaskAddForm.scss";
 
 const TaskAddButton = ({ addTask, setTaskAddInProgress }) => {
-  const [newTaskText, setNewTaskText] = useState('');
+  const [newTaskText, setNewTaskText] = useState("");
 
   const handleAddTask = e => {
     e.preventDefault();
-    if (newTaskText) addTask({ subject: newTaskText, content: '' });
+    if (newTaskText) addTask({ subject: newTaskText, content: "" });
 
     setTaskAddInProgress(false);
-    setNewTaskText('');
+    setNewTaskText("");
   };
   return (
-    <form onSubmit={handleAddTask} className='task-add-form'>
+    <form onSubmit={handleAddTask} className="task-add-form">
       <input
         value={newTaskText}
         onChange={e => setNewTaskText(e.target.value)}
-        placeholder='Task Subject'
+        placeholder="Task Subject"
         autoFocus
       />
-      <button className='task-submit-button' type='submit'>
+      <button className="task-submit-button" type="submit">
         Add
       </button>
       <span
-        className='close-button'
+        className="close-button"
         onClick={() => setTaskAddInProgress(false)}
       >
         &#9932;
@@ -43,7 +43,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(TaskAddButton);
+export default connect(null, mapDispatchToProps)(TaskAddButton);

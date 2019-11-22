@@ -7,15 +7,15 @@ import {
   DELETE_TASK,
   FILTER_TASKS,
   REHYDRATE
-} from '../types';
-import SAMPLE_DATA from '../../sample-data/sampleData';
-import { deleteTasks, deleteItem } from './utils';
+} from "../types";
+import SAMPLE_DATA from "../../sample-data/sampleData";
+import { deleteTasks, deleteItem } from "./utils";
 
 const INITIAL_STATE = {
   collections: SAMPLE_DATA.collections,
   collectionOrder: SAMPLE_DATA.collectionOrder,
   tasks: SAMPLE_DATA.tasks,
-  filter: ''
+  filter: ""
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {
