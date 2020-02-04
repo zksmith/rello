@@ -6,16 +6,17 @@ import {
   ADD_TASK,
   DELETE_TASK,
   FILTER_TASKS,
-  REHYDRATE
-} from "../types";
-import SAMPLE_DATA from "../../sample-data/sampleData";
-import { deleteTasks, deleteItem } from "./utils";
+  REHYDRATE,
+  UPDATE_TASK
+} from '../types';
+import SAMPLE_DATA from '../../sample-data/sampleData';
+import { deleteTasks, deleteItem } from './utils';
 
 const INITIAL_STATE = {
   collections: SAMPLE_DATA.collections,
   collectionOrder: SAMPLE_DATA.collectionOrder,
   tasks: SAMPLE_DATA.tasks,
-  filter: ""
+  filter: ''
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {
@@ -114,6 +115,18 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         }
       };
     }
+    case UPDATE_TASK:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.payload.id]: {
+            id: action.payload.id,
+            subject: action.payload.subject,
+            description: action.payload.description
+          }
+        }
+      };
     case DELETE_TASK:
       return {
         ...state,
