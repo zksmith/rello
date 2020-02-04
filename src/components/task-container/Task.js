@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { deleteTask, updateTask } from '../../redux/actions/boardActions';
+import { deleteTask, updateTask } from '../../redux/actions/collectionActions';
 
 import './Task.scss';
 

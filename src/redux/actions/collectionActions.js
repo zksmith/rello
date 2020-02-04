@@ -6,7 +6,10 @@ import {
   MOVE_TASK,
   DELETE_COLLECTION,
   MOVE_COLLECTION,
-  FILTER_TASKS
+  FILTER_TASKS,
+  DELETE_TASK,
+  ADD_TASK,
+  UPDATE_TASK
 } from "../types";
 
 export const setCollections = collections => ({
@@ -51,6 +54,20 @@ export const moveTask = ({
     sourceIndex,
     destinationIndex
   }
+});
+export const addTask = (collectionId, taskId, { subject, content }) => ({
+  type: ADD_TASK,
+  payload: { collectionId, taskId, subject, content }
+});
+
+export const deleteTask = (collectionId, taskId) => ({
+  type: DELETE_TASK,
+  payload: { collectionId, taskId }
+});
+
+export const updateTask = (id, subject, description) => ({
+  type: UPDATE_TASK,
+  payload: { id, subject, description }
 });
 
 export const filterTasks = text => ({
