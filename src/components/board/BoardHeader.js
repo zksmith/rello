@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-import { filterTasks } from "../../redux/actions/collectionActions";
-import { setBoardName } from "../../redux/actions/boardActions";
+import { filterTasks } from '../../redux/actions/collectionActions';
+import { setBoardName } from '../../redux/actions/boardActions';
 
-import "./BoardHeader.scss";
+import './BoardHeader.scss';
 
 const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
   const [nameChange, setNameChange] = useState(false);
   const [boardNameInput, setBoardNameInput] = useState(boardName);
 
   return (
-    <section className="board-header">
+    <section className='board-header'>
       {nameChange ? (
         <form
           onSubmit={e => {
@@ -21,8 +21,8 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
           }}
         >
           <input
-            type="text"
-            style={{ marginRight: "5px" }}
+            type='text'
+            style={{ marginRight: '5px' }}
             value={boardNameInput}
             autoFocus
             onChange={e => setBoardNameInput(e.target.value)}
@@ -34,17 +34,25 @@ const BoardHeader = ({ boardName, totalTasks, filterTasks, setBoardName }) => {
         </form>
       ) : (
         <strong
-          className="board-header-block"
+          className='board-header-block'
           onClick={() => setNameChange(true)}
         >
-          {boardName} {""}
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="white" viewBox="0 0 24 24"><path d="M19.769 9.923l-12.642 12.639-7.127 1.438 1.438-7.128 12.641-12.64 5.69 5.691zm1.414-1.414l2.817-2.82-5.691-5.689-2.816 2.817 5.69 5.692z"/></svg>
+          {boardName} {''}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='15'
+            height='15'
+            fill='#17394d'
+            viewBox='0 0 24 24'
+          >
+            <path d='M19.769 9.923l-12.642 12.639-7.127 1.438 1.438-7.128 12.641-12.64 5.69 5.691zm1.414-1.414l2.817-2.82-5.691-5.689-2.816 2.817 5.69 5.692z' />
+          </svg>
         </strong>
       )}
-      <span className="board-header-block">Total Tasks: {totalTasks}</span>
+      <span className='board-header-block'>Total Tasks: {totalTasks}</span>
       <input
-        type="text"
-        placeholder="Search Tasks"
+        type='text'
+        placeholder='Search Tasks'
         onChange={e => filterTasks(e.target.value)}
       />
     </section>

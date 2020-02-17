@@ -8,7 +8,10 @@
     padding: 5px;
     border-radius: 3px;
     border: 0px;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.3);
+    color: #798d99;
+    background: #dfe3e6;
+    &:hover {
+      color: #374046;
+    }
   }
 }

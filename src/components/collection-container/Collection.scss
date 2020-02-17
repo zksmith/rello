@@ -1,9 +1,9 @@
 .collection {
   display: flex;
   flex-direction: column;
-  background-color: #282828;
-  border-radius: 3px;
-  color: #fff;
+  background-color: #dfe3e6;
+  border-radius: 0.25rem;
+  color: #17394d;
   max-width: 300px;
   min-width: 300px;
   max-height: 85vh;
@@ -18,9 +18,9 @@
 
     .collection-delete {
       cursor: pointer;
-      color: #777777;
+      color: #798d99;
       &:hover {
-        color: #ce0000;
+        color: #374046;
       }
     }
   }
@@ -28,9 +28,9 @@
   .add-button {
     background: none;
     border: none;
-    color: #777777;
+    color: #798d99;
     &:hover {
-      color: #eee;
+      color: #374046;
     }
   }
 }
