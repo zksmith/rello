@@ -14,7 +14,7 @@ const Task = ({
   collectionId,
   index,
   deleteTask,
-  updateTask
+  updateTask,
 }) => {
   const [modalIsOpen, setModalOpen] = useState(false);
   const [subjectCopy, setSubjectCopy] = useState(subject);
@@ -22,7 +22,7 @@ const Task = ({
     description ? description : ''
   );
 
-  const handleTaskUpdate = e => {
+  const handleTaskUpdate = (e) => {
     e.preventDefault();
     if (window.confirm(`Are you sure you wish to update "${subject}" task?`))
       updateTask(id, subjectCopy, descriptionCopy);
@@ -32,7 +32,7 @@ const Task = ({
   return (
     <>
       <Draggable draggableId={id} index={index}>
-        {provided => (
+        {(provided) => (
           <div
             className='task'
             {...provided.draggableProps}
@@ -63,7 +63,7 @@ const Task = ({
         isOpen={modalIsOpen}
         style={{
           overlay: {
-            backgroundColor: 'rgba(0,0,0,0.8)'
+            backgroundColor: 'rgba(0,0,0,0.8)',
           },
           content: {
             backgroundColor: '#282828',
@@ -73,8 +73,8 @@ const Task = ({
             right: 'auto',
             bottom: 'auto',
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
-          }
+            transform: 'translate(-50%, -50%)',
+          },
         }}
       >
         <form action='#' className='modal-form'>
@@ -82,7 +82,7 @@ const Task = ({
             type='text'
             placeholder='Task Subject'
             value={subjectCopy}
-            onChange={e => {
+            onChange={(e) => {
               setSubjectCopy(e.target.value);
             }}
           />
@@ -90,14 +90,14 @@ const Task = ({
             type='text'
             placeholder='Task Description'
             value={descriptionCopy}
-            onChange={e => {
+            onChange={(e) => {
               setDescriptionCopy(e.target.value);
             }}
           />
           <div className='modal-buttons'>
             <button
               className='update'
-              onClick={e => {
+              onClick={(e) => {
                 handleTaskUpdate(e);
               }}
             >
@@ -105,7 +105,7 @@ const Task = ({
             </button>
             <button
               className='delete'
-              onClick={e => {
+              onClick={(e) => {
                 e.preventDefault();
                 if (
                   window.confirm(
@@ -125,14 +125,13 @@ const Task = ({
   );
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   deleteTask: (collectionId, id) => {
     dispatch(deleteTask(collectionId, id));
   },
   updateTask: (id, subject, description) => {
-    console.log(id, subject, description);
     dispatch(updateTask(id, subject, description));
-  }
+  },
 });
 
 export default connect(null, mapDispatchToProps)(Task);
