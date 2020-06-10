@@ -17,6 +17,6 @@ https://rello.netlify.com/
 ## To run locally
 
 - Clone this repository
-- Navigate to the 'twitch-react-app' directory
+- Navigate to the 'rello' directory
 - Run the command `npm install`
 - Run the command `npm start`
