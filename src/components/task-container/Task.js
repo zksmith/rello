@@ -42,11 +42,13 @@ const Task = ({
           >
             <p style={{ width: '90%' }}>
               {priority && (
-                <strong className={`task-tag ${priority}`}>
-                  {priority === 'low' ? `Low Priority` : 'High Priority'}
-                </strong>
+                <>
+                  <strong className={`task-tag ${priority}`}>
+                    {priority === 'low' ? `Low Priority` : 'High Priority'}
+                  </strong>
+                  <br />
+                </>
               )}
-              <br />
               {subject}
             </p>
             <button
