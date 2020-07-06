@@ -7,7 +7,7 @@ import {
   DELETE_TASK,
   FILTER_TASKS,
   REHYDRATE,
-  UPDATE_TASK
+  UPDATE_TASK,
 } from '../types';
 import SAMPLE_DATA from '../../sample-data/sampleData';
 import { deleteTasks, deleteItem } from './utils';
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   collections: SAMPLE_DATA.collections,
   collectionOrder: SAMPLE_DATA.collectionOrder,
   tasks: SAMPLE_DATA.tasks,
-  filter: ''
+  filter: '',
 };
 
 const boardReducer = (state = INITIAL_STATE, action) => {
@@ -26,21 +26,21 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         ...state,
         collections: {
           ...state.collections,
-          [action.payload.id]: { ...action.payload }
+          [action.payload.id]: { ...action.payload },
         },
-        collectionOrder: [...state.collectionOrder, action.payload.id]
+        collectionOrder: [...state.collectionOrder, action.payload.id],
       };
     case DELETE_COLLECTION:
       return {
         ...state,
         collections: deleteItem(action.payload, state.collections),
         collectionOrder: state.collectionOrder.filter(
-          id => id !== action.payload
+          (id) => id !== action.payload
         ),
         tasks: deleteTasks(
           state.collections[action.payload].taskIds,
           state.tasks
-        )
+        ),
       };
     case MOVE_COLLECTION: {
       const newCollectionOrder = [...state.collectionOrder];
@@ -53,7 +53,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        collectionOrder: newCollectionOrder
+        collectionOrder: newCollectionOrder,
       };
     }
     case MOVE_TASK: {
@@ -62,7 +62,7 @@ const boardReducer = (state = INITIAL_STATE, action) => {
         prevCollectionId,
         taskId,
         sourceIndex,
-        destinationIndex
+        destinationIndex,
       } = action.payload;
 
       const newTaskIds = [...state.collections[collectionId].taskIds];
@@ -78,18 +78,18 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           ...state.collections,
           [collectionId]: {
             ...state.collections[collectionId],
-            taskIds: newTaskIds
+            taskIds: newTaskIds,
           },
           [prevCollectionId]: {
             ...state.collections[prevCollectionId],
             taskIds:
               prevCollectionId !== collectionId
                 ? state.collections[prevCollectionId].taskIds.filter(
-                    id => id !== taskId
+                    (id) => id !== taskId
                   )
-                : newTaskIds
-          }
-        }
+                : newTaskIds,
+          },
+        },
       };
     }
     case ADD_TASK: {
@@ -102,17 +102,17 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           ...state.collections,
           [collectionId]: {
             ...state.collections[collectionId],
-            taskIds: newTaskIds
-          }
+            taskIds: newTaskIds,
+          },
         },
         tasks: {
           ...state.tasks,
           [taskId]: {
             id: taskId,
             subject,
-            content
-          }
-        }
+            content,
+          },
+        },
       };
     }
     case UPDATE_TASK:
@@ -123,9 +123,10 @@ const boardReducer = (state = INITIAL_STATE, action) => {
           [action.payload.id]: {
             id: action.payload.id,
             subject: action.payload.subject,
-            description: action.payload.description
-          }
-        }
+            description: action.payload.description,
+            priority: action.payload.priority,
+          },
+        },
       };
     case DELETE_TASK:
       return {
@@ -137,20 +138,20 @@ const boardReducer = (state = INITIAL_STATE, action) => {
             ...state.collections[action.payload.collectionId],
             taskIds: state.collections[
               action.payload.collectionId
-            ].taskIds.filter(id => id !== action.payload.taskId)
-          }
-        }
+            ].taskIds.filter((id) => id !== action.payload.taskId),
+          },
+        },
       };
     case FILTER_TASKS:
       return {
         ...state,
-        filter: action.payload.toLowerCase()
+        filter: action.payload.toLowerCase(),
       };
     case REHYDRATE:
       if (action.payload)
         return {
           ...action.payload.collectionState,
-          filter: state.filter
+          filter: state.filter,
         };
       return state;
     default:

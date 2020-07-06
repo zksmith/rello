@@ -59,3 +59,22 @@
     }
   }
 }
+
+.modal-form select {
+  margin-bottom: 10px;
+  background-color: rgb(40, 40, 40);
+  color: white;
+}
+
+.task-tag {
+  font-size: 12px;
+  padding: 0 10px;
+  border-radius: 0.25rem;
+  color: white;
+  &.low {
+    background-color: #00c2e0;
+  }
+  &.high {
+    background-color: #eb5a46;
+  }
+}

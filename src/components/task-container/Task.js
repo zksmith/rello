@@ -10,7 +10,7 @@ import './Task.scss';
 Modal.setAppElement('#root');
 
 const Task = ({
-  task: { id, subject, description },
+  task: { id, subject, description, priority },
   collectionId,
   index,
   deleteTask,
@@ -21,11 +21,12 @@ const Task = ({
   const [descriptionCopy, setDescriptionCopy] = useState(
     description ? description : ''
   );
+  const [selectedPriority, setSelectedPriority] = useState('');
 
   const handleTaskUpdate = (e) => {
     e.preventDefault();
     if (window.confirm(`Are you sure you wish to update "${subject}" task?`))
-      updateTask(id, subjectCopy, descriptionCopy);
+      updateTask(id, subjectCopy, descriptionCopy, selectedPriority);
     setModalOpen(false);
   };
 
@@ -39,7 +40,15 @@ const Task = ({
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <p style={{ width: '90%' }}>{subject}</p>
+            <p style={{ width: '90%' }}>
+              {priority && (
+                <strong className={`task-tag ${priority}`}>
+                  {priority === 'low' ? `Low Priority` : 'High Priority'}
+                </strong>
+              )}
+              <br />
+              {subject}
+            </p>
             <button
               className='task-edit'
               onClick={() => {
@@ -78,6 +87,11 @@ const Task = ({
         }}
       >
         <form action='#' className='modal-form'>
+          <select onChange={(e) => setSelectedPriority(e.target.value)}>
+            <option value=''>Select Priority</option>
+            <option value='low'>Low Priority</option>
+            <option value='high'>High Priority</option>
+          </select>
           <input
             type='text'
             placeholder='Task Subject'
@@ -129,8 +143,8 @@ const mapDispatchToProps = (dispatch) => ({
   deleteTask: (collectionId, id) => {
     dispatch(deleteTask(collectionId, id));
   },
-  updateTask: (id, subject, description) => {
-    dispatch(updateTask(id, subject, description));
+  updateTask: (id, subject, description, priority) => {
+    dispatch(updateTask(id, subject, description, priority));
   },
 });
 

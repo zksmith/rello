@@ -1,4 +1,4 @@
-import uuidv4 from "uuid";
+import uuidv4 from 'uuid';
 
 import {
   SET_COLLECTIONS,
@@ -9,25 +9,25 @@ import {
   FILTER_TASKS,
   DELETE_TASK,
   ADD_TASK,
-  UPDATE_TASK
-} from "../types";
+  UPDATE_TASK,
+} from '../types';
 
-export const setCollections = collections => ({
+export const setCollections = (collections) => ({
   type: SET_COLLECTIONS,
-  payload: collections
+  payload: collections,
 });
 
-export const addCollection = title => {
+export const addCollection = (title) => {
   const id = uuidv4();
   return {
     type: ADD_COLLECTION,
-    payload: { id, title, taskIds: [] }
+    payload: { id, title, taskIds: [] },
   };
 };
 
-export const deleteCollection = collectionId => ({
+export const deleteCollection = (collectionId) => ({
   type: DELETE_COLLECTION,
-  payload: collectionId
+  payload: collectionId,
 });
 export const moveCollection = (
   sourceIndex,
@@ -35,7 +35,7 @@ export const moveCollection = (
   collectionId
 ) => ({
   type: MOVE_COLLECTION,
-  payload: { sourceIndex, destinationIndex, collectionId }
+  payload: { sourceIndex, destinationIndex, collectionId },
 });
 
 //Handle Task Drag and Drop
@@ -44,7 +44,7 @@ export const moveTask = ({
   prevCollectionId,
   taskId,
   sourceIndex,
-  destinationIndex
+  destinationIndex,
 }) => ({
   type: MOVE_TASK,
   payload: {
@@ -52,25 +52,25 @@ export const moveTask = ({
     prevCollectionId,
     taskId,
     sourceIndex,
-    destinationIndex
-  }
+    destinationIndex,
+  },
 });
 export const addTask = (collectionId, taskId, { subject, content }) => ({
   type: ADD_TASK,
-  payload: { collectionId, taskId, subject, content }
+  payload: { collectionId, taskId, subject, content },
 });
 
 export const deleteTask = (collectionId, taskId) => ({
   type: DELETE_TASK,
-  payload: { collectionId, taskId }
+  payload: { collectionId, taskId },
 });
 
-export const updateTask = (id, subject, description) => ({
+export const updateTask = (id, subject, description, priority) => ({
   type: UPDATE_TASK,
-  payload: { id, subject, description }
+  payload: { id, subject, description, priority },
 });
 
-export const filterTasks = text => ({
+export const filterTasks = (text) => ({
   type: FILTER_TASKS,
-  payload: text
+  payload: text,
 });
